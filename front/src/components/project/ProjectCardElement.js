@@ -19,7 +19,10 @@ const ProjectCardElement = (props) => {
             variant="outline-info"
             size="sm"
             className="mr-3 btn btn-outline-info btn-sm"
-            onClick={() => context.setIsEditing(true)}
+            onClick={() => {
+              context.getProjectId(project.id);
+              context.setIsEditing(true);
+            }}
           >
             편집
           </Button>

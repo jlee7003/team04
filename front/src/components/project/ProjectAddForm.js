@@ -23,7 +23,6 @@ const ProjectAddForm = () => {
     };
 
     context.setProjects((prevState) => [project, ...prevState]);
-    console.log(context.projects);
 
     setName('');
     setDescription('');

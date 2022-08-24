@@ -18,12 +18,21 @@ export const ProjectContextProvider = (props) => {
   const [projects, setProjects] = useState([]);
 
   //Test
-  const [projectId, getProjectId] = useState('');
+  const [projectId, setProjectId] = useState([]);
 
-  const editProject = (editValues) =>
+  const getProjectId = (editProjectId) => {
+    setProjectId((prevState) =>
+      projectId.includes(editProjectId)
+        ? [...prevState, ...projectId]
+        : [...prevState, ...projectId, editProjectId]
+    );
+  };
+  //
+
+  const editProject = (editValues, editProjectId) =>
     setProjects(
       projects.map((project) =>
-        project.id === projectId ? { ...project, editValues } : project
+        project.id === editProjectId ? { ...project, ...editValues } : project
       )
     );
 
@@ -41,6 +50,7 @@ export const ProjectContextProvider = (props) => {
         isEditing,
         setIsEditing,
         projectId,
+        setProjectId,
         getProjectId,
         projects,
         setProjects,
