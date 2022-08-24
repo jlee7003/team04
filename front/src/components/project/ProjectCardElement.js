@@ -23,6 +23,14 @@ const ProjectCardElement = (props) => {
           >
             편집
           </Button>
+          <Button
+            variant="outline-info"
+            size="sm"
+            className="mr-3 btn btn-outline-info btn-sm"
+            onClick={() => context.deleteProject(project.id)}
+          >
+            삭제
+          </Button>
         </Col>
       </div>
     </Card.Text>

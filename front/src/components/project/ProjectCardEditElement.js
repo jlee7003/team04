@@ -29,16 +29,11 @@ const ProjectEditElement = (props) => {
   return props.projects.map((project) => (
     <Form key={project.id}>
       <Form.Group>
-        <Form.Control
-          type="text"
-          value={this.name}
-          onChange={(e) => this.setName(e.target.value)}
-        />
+        <Form.Control type="text" onChange={(e) => setName(e.target.value)} />
       </Form.Group>
       <Form.Group className="mt-3">
         <Form.Control
           type="text"
-          value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
       </Form.Group>
@@ -71,7 +66,9 @@ const ProjectEditElement = (props) => {
           </Button>
           <Button
             variant="secondary"
-            onClick={() => context.setIsEditing(false)}
+            onClick={() => {
+              context.setIsEditing(false);
+            }}
           >
             취소
           </Button>

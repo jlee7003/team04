@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 
 const ProjectContext = React.createContext({
   isAdding: false,
+  isEditing: false,
   setIsAdding: (value) => {},
   setIsEditing: (value) => {},
   setProjects: (value) => {},
   editProject: (value) => {},
+
+  //test
+  getProjectId: () => {},
 });
 
 export const ProjectContextProvider = (props) => {
@@ -13,12 +17,21 @@ export const ProjectContextProvider = (props) => {
   const [isEditing, setIsEditing] = useState(false);
   const [projects, setProjects] = useState([]);
 
+  //Test
+  const [projectId, getProjectId] = useState('');
+
   const editProject = (editValues) =>
     setProjects(
       projects.map((project) =>
-        project.id === isEditing ? { ...project, editValues } : project
+        project.id === projectId ? { ...project, editValues } : project
       )
     );
+
+  const deleteProject = (id) => {
+    const filteredProjects = projects.filter((project) => project.id !== id);
+
+    setProjects(filteredProjects);
+  };
 
   return (
     <ProjectContext.Provider
@@ -27,9 +40,12 @@ export const ProjectContextProvider = (props) => {
         setIsAdding,
         isEditing,
         setIsEditing,
+        projectId,
+        getProjectId,
         projects,
         setProjects,
         editProject,
+        deleteProject,
       }}
     >
       {props.children}
