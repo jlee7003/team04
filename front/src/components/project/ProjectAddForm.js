@@ -17,9 +17,17 @@ const ProjectAddForm = (props) => {
       endDay,
     };
 
+<<<<<<< HEAD
     await Api.post('projects', project);
     await props.fetchProjects();
 
+=======
+    console.log({ ...props });
+
+    await Api.post('projects', project);
+    await props.fetchProjects();
+
+>>>>>>> 3806cecb2365adc4214bafc071f69d5c64268389
     props.setIsAdding(false);
   };
 
