@@ -54,20 +54,22 @@ const ProjectAddForm = () => {
             <Form.Control
               type="date"
               onChange={(e) => setFromDate(e.target.value)}
+              // defaultValue={currentDate}
             />
             {/* <DatePicker
               selected={currentDate}
-              onChange={(e) => setToDate(new Date(e).toLocaleDateString())}
+              onChange={(e) => setFromDate(() => e.getTime())}
             /> */}
           </Col>
           <Col className="col-auto">
             <Form.Control
               type="date"
               onChange={(e) => setToDate(e.target.value)}
+              // defaultValue={currentDate}
             />
             {/* <DatePicker
               selected={currentDate}
-              onChange={(e) => setToDate(new Date(e).toLocaleDateString())}
+              onChange={(e) => setToDate(() => e.getTime())}
             /> */}
           </Col>
         </Form.Group>

@@ -7,9 +7,10 @@ const ProjectContext = React.createContext({
   setIsEditing: (value) => {},
   setProjects: (value) => {},
   editProject: (value) => {},
+  setProjectId: (value) => {},
 
   //test
-  getProjectId: () => {},
+  getProjectId: (value) => {},
 });
 
 export const ProjectContextProvider = (props) => {

@@ -12,13 +12,30 @@ const ProjectEditElement = (props) => {
   const [toDate, setToDate] = useState('');
 
   const submitHandler = (editProjectId) => {
-    const editedProject = {
-      name,
-      description,
-      date: `${fromDate} ~ ${toDate}`,
+    const getFilteredProject = context.projects.filter(
+      (project) => project.id === editProjectId
+    );
+
+    let editedProject = {};
+
+    if (name) {
+      editedProject = { ...editedProject, name };
+    }
+
+    if (description) {
+      editedProject = { ...editedProject, description };
+    }
+
+    if (fromDate && toDate) {
+      editedProject = { ...editedProject, date: `${fromDate} ~ ${toDate}` };
+    }
+
+    const returnProject = {
+      ...getFilteredProject[0],
+      ...editedProject,
     };
 
-    context.editProject(editedProject, editProjectId);
+    context.editProject(returnProject, editProjectId);
 
     setName('');
     setDescription('');
@@ -49,7 +66,7 @@ const ProjectEditElement = (props) => {
               type="date"
               // value={project.date.trim().split('~')[0]}
               onChange={(e) => setFromDate(e.target.value)}
-              defaultValue={project.date.trim().split('&')[0]}
+              defaultValue={project.date.split('~')[0].trim()}
             />
           </Col>
           <Col className="col-auto">
@@ -57,7 +74,7 @@ const ProjectEditElement = (props) => {
               type="date"
               // value={project.date.trim().split('~')[1]}
               onChange={(e) => setToDate(e.target.value)}
-              defaultValue={project.toDate}
+              defaultValue={project.date.split('~')[1].trim()}
             />
           </Col>
         </Form.Group>
