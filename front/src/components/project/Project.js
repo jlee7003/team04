@@ -6,7 +6,10 @@ import { ProjectContextProvider } from './store/ProjectContext';
 const Project = ({ portfolioOwnerId, isEditable }) => {
   return (
     <ProjectContextProvider>
-      <ProjectCard portfolioOwnerId={portfolioOwnerId} />
+      <ProjectCard
+        portfolioOwnerId={portfolioOwnerId}
+        isEditable={isEditable}
+      />
     </ProjectContextProvider>
   );
 };

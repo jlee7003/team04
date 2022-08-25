@@ -106,29 +106,31 @@ const ProjectEditElement = (props) => {
             <span className="text-muted">{project.content}</span> <br />
             <span className="text-muted">{`${project.startDay} ~ ${project.endDay}`}</span>
           </Col>
-          <Col className="col-lg-1">
-            <Button
-              variant="outline-info"
-              size="sm"
-              className="mr-3 btn btn-outline-info btn-sm"
-              onClick={() => {
-                context.getProjectId(project.id);
-                context.setIsEditing(true);
-              }}
-            >
-              편집
-            </Button>
-            <Button
-              variant="outline-info"
-              size="sm"
-              className="mr-3 btn btn-outline-info btn-sm"
-              onClick={() => {
-                props.deleteProject(project.id);
-              }}
-            >
-              삭제
-            </Button>
-          </Col>
+          {props.isEditable && (
+            <Col className="col-lg-1">
+              <Button
+                variant="outline-info"
+                size="sm"
+                className="mr-3 btn btn-outline-info btn-sm"
+                onClick={() => {
+                  context.getProjectId(project.id);
+                  context.setIsEditing(true);
+                }}
+              >
+                편집
+              </Button>
+              <Button
+                variant="outline-info"
+                size="sm"
+                className="mr-3 btn btn-outline-info btn-sm"
+                onClick={() => {
+                  props.deleteProject(project.id);
+                }}
+              >
+                삭제
+              </Button>
+            </Col>
+          )}
         </div>
       </Card.Text>
     )

@@ -7,7 +7,7 @@ import ProjectCardElement from './ProjectCardElement';
 import ProjectEditElement from './ProjectCardEditElement';
 import ProjectContext from './store/ProjectContext';
 
-const ProjectCard = ({ portfolioOwnerId }) => {
+const ProjectCard = ({ portfolioOwnerId, isEditable }) => {
   const context = useContext(ProjectContext);
   const [projects, setProjects] = useState([]);
 
@@ -45,27 +45,31 @@ const ProjectCard = ({ portfolioOwnerId }) => {
         <Card.Title>프로젝트</Card.Title>
         {context.isEditing ? (
           <ProjectEditElement
+            isEditable={isEditable}
             projects={projects}
             deleteProject={deleteProject}
             editProject={editProject}
           />
         ) : (
           <ProjectCardElement
+            isEditable={isEditable}
             projects={projects}
             deleteProject={deleteProject}
             editProject={editProject}
           />
         )}
-        <div className="mt-3 text-center mb-4 row">
-          <div className="col-sm-20">
-            <Button
-              className="btn btn-primary"
-              onClick={() => context.setIsAdding(true)}
-            >
-              +
-            </Button>
+        {isEditable && (
+          <div className="mt-3 text-center mb-4 row">
+            <div className="col-sm-20">
+              <Button
+                className="btn btn-primary"
+                onClick={() => context.setIsAdding(true)}
+              >
+                +
+              </Button>
+            </div>
           </div>
-        </div>
+        )}
         {context.isAdding && <ProjectAddForm fetchProjects={fetchProjects} />}
       </Card.Body>
     </Card>
