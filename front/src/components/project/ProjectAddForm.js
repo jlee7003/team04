@@ -12,7 +12,7 @@ const ProjectAddForm = () => {
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
 
-  // const currentDate = new Date();
+  // const currentDate = new Date().toLocaleDateString();
 
   const submitHandler = () => {
     const project = {
@@ -54,7 +54,6 @@ const ProjectAddForm = () => {
             <Form.Control
               type="date"
               onChange={(e) => setFromDate(e.target.value)}
-              // defaultValue={currentDate}
             />
             {/* <DatePicker
               selected={currentDate}
@@ -65,7 +64,6 @@ const ProjectAddForm = () => {
             <Form.Control
               type="date"
               onChange={(e) => setToDate(e.target.value)}
-              // defaultValue={currentDate}
             />
             {/* <DatePicker
               selected={currentDate}
