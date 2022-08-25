@@ -10,9 +10,9 @@ const ProjectCardElement = (props) => {
     <Card.Text key={project.id}>
       <div className="align-items-center row">
         <Col>
-          {project.name} <br />{' '}
-          <span className="text-muted">{project.description}</span> <br />
-          <span className="text-muted">{project.date}</span>
+          {project.title} <br />
+          <span className="text-muted">{project.content}</span> <br />
+          <span className="text-muted">{`${project.startDay} ~ ${project.endDay}`}</span>
         </Col>
         <Col className="col-lg-1">
           <Button
@@ -30,7 +30,10 @@ const ProjectCardElement = (props) => {
             variant="outline-info"
             size="sm"
             className="mr-3 btn btn-outline-info btn-sm"
-            onClick={() => context.deleteProject(project.id)}
+            onClick={() => {
+              props.deleteProject(project.id);
+              props.fetchProjects();
+            }}
           >
             삭제
           </Button>

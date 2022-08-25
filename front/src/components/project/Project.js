@@ -3,10 +3,10 @@ import React from 'react';
 import ProjectCard from './ProjectCard';
 import { ProjectContextProvider } from './store/ProjectContext';
 
-const Project = () => {
+const Project = ({ portfolioOwnerId, isEditable }) => {
   return (
     <ProjectContextProvider>
-      <ProjectCard />
+      <ProjectCard portfolioOwnerId={portfolioOwnerId} />
     </ProjectContextProvider>
   );
 };

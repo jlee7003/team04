@@ -8,6 +8,7 @@ const ProjectContext = React.createContext({
   setProjects: (value) => {},
   editProject: (value) => {},
   setProjectId: (value) => {},
+  addProject: (value) => {},
 
   //test
   getProjectId: (value) => {},
@@ -16,32 +17,18 @@ const ProjectContext = React.createContext({
 export const ProjectContextProvider = (props) => {
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [projects, setProjects] = useState([]);
 
   //Test
   const [projectId, setProjectId] = useState([]);
 
-  const getProjectId = (editProjectId) => {
+  const getProjectId = async (editProjectId) => {
     setProjectId((prevState) =>
       projectId.includes(editProjectId)
-        ? [...prevState, ...projectId]
-        : [...prevState, ...projectId, editProjectId]
+        ? prevState
+        : [...prevState, editProjectId]
     );
   };
   //
-
-  const editProject = (editValues, editProjectId) =>
-    setProjects(
-      projects.map((project) =>
-        project.id === editProjectId ? { ...project, ...editValues } : project
-      )
-    );
-
-  const deleteProject = (id) => {
-    const filteredProjects = projects.filter((project) => project.id !== id);
-
-    setProjects(filteredProjects);
-  };
 
   return (
     <ProjectContext.Provider
@@ -53,10 +40,6 @@ export const ProjectContextProvider = (props) => {
         projectId,
         setProjectId,
         getProjectId,
-        projects,
-        setProjects,
-        editProject,
-        deleteProject,
       }}
     >
       {props.children}

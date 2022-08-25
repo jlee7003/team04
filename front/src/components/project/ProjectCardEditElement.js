@@ -6,41 +6,36 @@ import { Form, Button, Col, Card } from 'react-bootstrap';
 const ProjectEditElement = (props) => {
   const context = useContext(ProjectContext);
 
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [fromDate, setFromDate] = useState('');
-  const [toDate, setToDate] = useState('');
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [startDay, setStartDay] = useState('');
+  const [endDay, setEndDay] = useState('');
 
   const submitHandler = (editProjectId) => {
-    const getFilteredProject = context.projects.filter(
-      (project) => project.id === editProjectId
-    );
-
     let editedProject = {};
 
-    if (name) {
-      editedProject = { ...editedProject, name };
+    if (title) {
+      editedProject = { ...editedProject, title };
     }
 
-    if (description) {
-      editedProject = { ...editedProject, description };
+    if (content) {
+      editedProject = { ...editedProject, content };
     }
 
-    if (fromDate && toDate) {
-      editedProject = { ...editedProject, date: `${fromDate} ~ ${toDate}` };
+    if (startDay) {
+      editedProject = { ...editedProject, startDay };
     }
 
-    const returnProject = {
-      ...getFilteredProject[0],
-      ...editedProject,
-    };
+    if (endDay) {
+      editedProject = { ...editedProject, endDay };
+    }
 
-    context.editProject(returnProject, editProjectId);
+    props.editProject(editedProject, editProjectId);
 
-    setName('');
-    setDescription('');
-    setFromDate('');
-    setToDate('');
+    setTitle('');
+    setContent('');
+    setStartDay('');
+    setEndDay('');
   };
 
   return props.projects.map((project) =>
@@ -49,15 +44,15 @@ const ProjectEditElement = (props) => {
         <Form.Group>
           <Form.Control
             type="text"
-            onChange={(e) => setName(e.target.value)}
-            defaultValue={project.name}
+            onChange={(e) => setTitle(e.target.value)}
+            defaultValue={project.title}
           />
         </Form.Group>
         <Form.Group className="mt-3">
           <Form.Control
             type="text"
-            onChange={(e) => setDescription(e.target.value)}
-            defaultValue={project.description}
+            onChange={(e) => setContent(e.target.value)}
+            defaultValue={project.content}
           />
         </Form.Group>
         <Form.Group className="mt-3 row">
@@ -65,16 +60,16 @@ const ProjectEditElement = (props) => {
             <Form.Control
               type="date"
               // value={project.date.trim().split('~')[0]}
-              onChange={(e) => setFromDate(e.target.value)}
-              defaultValue={project.date.split('~')[0].trim()}
+              onChange={(e) => setStartDay(e.target.value)}
+              defaultValue={project.startDay}
             />
           </Col>
           <Col className="col-auto">
             <Form.Control
               type="date"
               // value={project.date.trim().split('~')[1]}
-              onChange={(e) => setToDate(e.target.value)}
-              defaultValue={project.date.split('~')[1].trim()}
+              onChange={(e) => setEndDay(e.target.value)}
+              defaultValue={project.endDay}
             />
           </Col>
         </Form.Group>
@@ -107,9 +102,9 @@ const ProjectEditElement = (props) => {
       <Card.Text key={project.id}>
         <div className="align-items-center row">
           <Col>
-            {project.name} <br />{' '}
-            <span className="text-muted">{project.description}</span> <br />
-            <span className="text-muted">{project.date}</span>
+            {project.title} <br />{' '}
+            <span className="text-muted">{project.content}</span> <br />
+            <span className="text-muted">{`${project.startDay} ~ ${project.endDay}`}</span>
           </Col>
           <Col className="col-lg-1">
             <Button
@@ -127,7 +122,10 @@ const ProjectEditElement = (props) => {
               variant="outline-info"
               size="sm"
               className="mr-3 btn btn-outline-info btn-sm"
-              onClick={() => context.deleteProject(project.id)}
+              onClick={() => {
+                props.deleteProject(project.id);
+                props.fetchProjects();
+              }}
             >
               삭제
             </Button>

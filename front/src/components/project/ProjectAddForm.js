@@ -1,35 +1,36 @@
 import React, { useContext, useState } from 'react';
+import * as Api from '../../api';
 
-import { Form, Button, Col } from 'react-bootstrap';
-// import DatePicker from 'react-datepicker';
 import ProjectContext from './store/ProjectContext';
+import { Form, Button, Col } from 'react-bootstrap';
 
-const ProjectAddForm = () => {
+const ProjectAddForm = (props) => {
   const context = useContext(ProjectContext);
 
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [fromDate, setFromDate] = useState('');
-  const [toDate, setToDate] = useState('');
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [startDay, setStartDay] = useState('');
+  const [endDay, setEndDay] = useState('');
 
-  // const currentDate = new Date().toLocaleDateString();
-
-  const submitHandler = () => {
+  const submitHandler = async () => {
     const project = {
-      name,
-      description,
-      date: `${fromDate} ~ ${toDate}`,
+      title,
+      content,
+      startDay,
+      endDay,
       id: Math.random().toString(),
     };
 
-    context.setProjects((prevState) => [project, ...prevState]);
-
-    setName('');
-    setDescription('');
-    setFromDate('');
-    setToDate('');
-
     context.setIsAdding(false);
+
+    Api.post('projects', project);
+
+    props.fetchProjects();
+
+    setTitle('');
+    setContent('');
+    setStartDay('');
+    setEndDay('');
   };
 
   return (
@@ -39,21 +40,21 @@ const ProjectAddForm = () => {
           <Form.Control
             type="text"
             placeholder="프로젝트 제목"
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setTitle(e.target.value)}
           />
         </Form.Group>
         <Form.Group className="mt-3">
           <Form.Control
             type="text"
             placeholder="상세 내역"
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e) => setContent(e.target.value)}
           />
         </Form.Group>
         <Form.Group className="mt-3 row">
           <Col className="col-auto">
             <Form.Control
               type="date"
-              onChange={(e) => setFromDate(e.target.value)}
+              onChange={(e) => setStartDay(e.target.value)}
             />
             {/* <DatePicker
               selected={currentDate}
@@ -63,7 +64,7 @@ const ProjectAddForm = () => {
           <Col className="col-auto">
             <Form.Control
               type="date"
-              onChange={(e) => setToDate(e.target.value)}
+              onChange={(e) => setEndDay(e.target.value)}
             />
             {/* <DatePicker
               selected={currentDate}
