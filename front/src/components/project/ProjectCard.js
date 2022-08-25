@@ -12,11 +12,14 @@ const ProjectCard = ({ portfolioOwnerId }) => {
   const [projects, setProjects] = useState([]);
 
   const fetchProjects = useCallback(async () => {
-    const response = await Api.get('projects', 'test@test.com');
-    const data = [...response.data];
+    const getUsers = await Api.get('users', portfolioOwnerId);
+    const userData = { ...getUsers.data };
 
-    setProjects(() => [...data]);
-  }, []);
+    const getProjects = await Api.get('projects', userData.email);
+    const projectsData = [...getProjects.data];
+
+    setProjects(() => [...projectsData]);
+  }, [portfolioOwnerId]);
 
   useEffect(() => {
     fetchProjects();

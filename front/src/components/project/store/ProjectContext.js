@@ -5,10 +5,7 @@ const ProjectContext = React.createContext({
   isEditing: false,
   setIsAdding: (value) => {},
   setIsEditing: (value) => {},
-  setProjects: (value) => {},
-  editProject: (value) => {},
   setProjectId: (value) => {},
-  addProject: (value) => {},
 
   //test
   getProjectId: (value) => {},
@@ -21,7 +18,7 @@ export const ProjectContextProvider = (props) => {
   //Test
   const [projectId, setProjectId] = useState([]);
 
-  const getProjectId = async (editProjectId) => {
+  const getProjectId = (editProjectId) => {
     setProjectId((prevState) =>
       projectId.includes(editProjectId)
         ? prevState

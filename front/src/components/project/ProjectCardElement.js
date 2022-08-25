@@ -32,7 +32,6 @@ const ProjectCardElement = (props) => {
             className="mr-3 btn btn-outline-info btn-sm"
             onClick={() => {
               props.deleteProject(project.id);
-              props.fetchProjects();
             }}
           >
             삭제
