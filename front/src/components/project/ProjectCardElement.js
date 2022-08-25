@@ -27,6 +27,10 @@ const ProjectCardElement = (props) => {
       editedProject = { ...editedProject, endDay };
     }
 
+    props.setProjectIdList(
+      props.projectIdList.filter((array) => array !== editProjectId)
+    );
+
     props.editProject(editedProject, editProjectId);
   };
 
