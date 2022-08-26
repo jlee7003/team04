@@ -5,11 +5,7 @@ import { AuthContextProvider } from './stores/AuthContext';
 const Project = ({ portfolioOwnerId, isEditable }) => {
   return (
     <AuthContextProvider>
-      <CardFrame
-        portfolioOwnerId={portfolioOwnerId}
-        isEditable={isEditable}
-        DATA_ENDPOINT={'projects'}
-      />
+      <CardFrame portfolioOwnerId={portfolioOwnerId} isEditable={isEditable} />
     </AuthContextProvider>
   );
 };
