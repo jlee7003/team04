@@ -3,35 +3,20 @@ import React, { useState } from 'react';
 import { Form, Button, Col, Card } from 'react-bootstrap';
 
 const ProjectCardElement = (props) => {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [startDay, setStartDay] = useState('');
-  const [endDay, setEndDay] = useState('');
+  const [projectValues, setProjectValues] = useState({});
+
+  const onChangeHandler = (e) => {
+    const { name, value } = e.target;
+
+    setProjectValues({ ...projectValues, [name]: value });
+  };
 
   const submitHandler = (editProjectId) => {
-    let editedProject = {};
-
-    if (title) {
-      editedProject = { ...editedProject, title };
-    }
-
-    if (content) {
-      editedProject = { ...editedProject, content };
-    }
-
-    if (startDay) {
-      editedProject = { ...editedProject, startDay };
-    }
-
-    if (endDay) {
-      editedProject = { ...editedProject, endDay };
-    }
-
     props.setProjectIdList(
       props.projectIdList.filter((array) => array !== editProjectId)
     );
 
-    props.editProject(editedProject, editProjectId);
+    props.editProject(projectValues, editProjectId);
   };
 
   return props.projects.map((project) =>
@@ -39,30 +24,34 @@ const ProjectCardElement = (props) => {
       <Form key={project.id}>
         <Form.Group>
           <Form.Control
+            name="title"
             type="text"
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={onChangeHandler}
             defaultValue={project.title}
           />
         </Form.Group>
         <Form.Group className="mt-3">
           <Form.Control
+            name="content"
             type="text"
-            onChange={(e) => setContent(e.target.value)}
+            onChange={onChangeHandler}
             defaultValue={project.content}
           />
         </Form.Group>
         <Form.Group className="mt-3 row">
           <Col className="col-auto">
             <Form.Control
+              name="startDay"
               type="date"
-              onChange={(e) => setStartDay(e.target.value)}
+              onChange={onChangeHandler}
               defaultValue={project.startDay}
             />
           </Col>
           <Col className="col-auto">
             <Form.Control
+              name="endDay"
               type="date"
-              onChange={(e) => setEndDay(e.target.value)}
+              onChange={onChangeHandler}
               defaultValue={project.endDay}
             />
           </Col>

@@ -4,20 +4,16 @@ import * as Api from '../../api';
 import { Form, Button, Col } from 'react-bootstrap';
 
 const ProjectAddForm = (props) => {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [startDay, setStartDay] = useState('');
-  const [endDay, setEndDay] = useState('');
+  const [projectValues, setProjectValues] = useState({});
+
+  const onChangeHandler = (e) => {
+    const { name, value } = e.target;
+
+    setProjectValues({ ...projectValues, [name]: value });
+  };
 
   const submitHandler = async () => {
-    const project = {
-      title,
-      content,
-      startDay,
-      endDay,
-    };
-
-    await Api.post('projects', project);
+    await Api.post('projects', projectValues);
     await props.fetchProjects();
 
     props.setIsAdding(false);
@@ -27,41 +23,35 @@ const ProjectAddForm = (props) => {
     <Form>
       <Form.Group>
         <Form.Control
+          name="title"
           type="text"
           placeholder="프로젝트 제목"
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={onChangeHandler}
         />
       </Form.Group>
       <Form.Group className="mt-3">
         <Form.Control
+          name="content"
           type="text"
           placeholder="상세 내역"
-          onChange={(e) => setContent(e.target.value)}
+          onChange={onChangeHandler}
         />
       </Form.Group>
       <Form.Group className="mt-3 row">
         <Col className="col-auto">
           <Form.Control
             type="date"
-            onChange={(e) => setStartDay(e.target.value)}
+            name="startDay"
+            onChange={onChangeHandler}
           />
         </Col>
         <Col className="col-auto">
-          <Form.Control
-            type="date"
-            onChange={(e) => setEndDay(e.target.value)}
-          />
+          <Form.Control type="date" name="endDay" onChange={onChangeHandler} />
         </Col>
       </Form.Group>
       <Form.Group className="mt-3 text-center">
         <Col>
-          <Button
-            variant="primary"
-            className="me-3"
-            onClick={() => {
-              submitHandler();
-            }}
-          >
+          <Button variant="primary" className="me-3" onClick={submitHandler}>
             확인
           </Button>
           <Button variant="secondary" onClick={() => props.setIsAdding(false)}>
