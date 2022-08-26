@@ -19,7 +19,7 @@ const CardFrame = ({ portfolioOwnerId, isEditable }) => {
     const getUser = await Api.get(USER_ENDPOINT, portfolioOwnerId);
     const userInfo = { ...getUser.data };
 
-    const getData = await Api.get(DATA_ENDPOINT, userInfo.email);
+    const getData = await Api.get(DATA_ENDPOINT, userInfo.id);
     const fetchedData = [...getData.data];
 
     setData(fetchedData);

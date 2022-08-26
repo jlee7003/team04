@@ -4,7 +4,7 @@ import { Col, Button, Form } from 'react-bootstrap';
 
 const CheckButton = (props) => {
   return (
-    <Form.Group className={props.className}>
+    <Form.Group className={`${props.className} mb-3`}>
       <Col>
         <Button
           variant="primary"

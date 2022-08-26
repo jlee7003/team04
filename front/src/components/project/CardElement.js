@@ -10,16 +10,16 @@ const CardElement = (props) => {
   return props.data.map((project) =>
     context.editIdList.includes(project.id) ? (
       <EditForm
-        project={project}
         key={project.id}
+        project={project}
         DATA_ENDPOINT={props.DATA_ENDPOINT}
         callFetch={props.callFetch}
       />
     ) : (
       <ListForm
+        key={project.id}
         isEditable={props.isEditable}
         project={project}
-        key={project.id}
         DATA_ENDPOINT={props.DATA_ENDPOINT}
         callFetch={props.callFetch}
       />
