@@ -1,22 +1,30 @@
-import React, { useState } from 'react';
-import * as Api from '../../api';
+import React, { useState, useContext } from 'react';
+import * as Api from '../../../api';
 
-import { Form, Button, Col } from 'react-bootstrap';
+import AuthContext from '../stores/AuthContext';
+import CheckButton from './CheckButton';
+import { Form, Col } from 'react-bootstrap';
 
-const ProjectAddForm = (props) => {
-  const [projectValues, setProjectValues] = useState({});
+const AddForm = (props) => {
+  const context = useContext(AuthContext);
+
+  const [dataValues, setdataValues] = useState({});
 
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
 
-    setProjectValues({ ...projectValues, [name]: value });
+    setdataValues({ ...dataValues, [name]: value });
   };
 
-  const submitHandler = async () => {
-    await Api.post('projects', projectValues);
-    await props.fetchProjects();
+  const callPost = async () => {
+    await Api.post(props.DATA_ENDPOINT, dataValues);
+    await props.callFetch();
 
-    props.setIsAdding(false);
+    context.setIsAdding(false);
+  };
+
+  const setIsAddingFalse = () => {
+    context.setIsAdding(false);
   };
 
   return (
@@ -49,18 +57,13 @@ const ProjectAddForm = (props) => {
           <Form.Control type="date" name="endDay" onChange={onChangeHandler} />
         </Col>
       </Form.Group>
-      <Form.Group className="mt-3 text-center">
-        <Col>
-          <Button variant="primary" className="me-3" onClick={submitHandler}>
-            확인
-          </Button>
-          <Button variant="secondary" onClick={() => props.setIsAdding(false)}>
-            취소
-          </Button>
-        </Col>
-      </Form.Group>
+      <CheckButton
+        className={'mt-3 text-center'}
+        submitHandler={callPost}
+        cancelHandler={setIsAddingFalse}
+      />
     </Form>
   );
 };
 
-export default ProjectAddForm;
+export default AddForm;

@@ -1,10 +1,16 @@
 import React from 'react';
-
-import ProjectCard from './ProjectCard';
+import CardFrame from './UI/CardFrame';
+import { AuthContextProvider } from './stores/AuthContext';
 
 const Project = ({ portfolioOwnerId, isEditable }) => {
   return (
-    <ProjectCard portfolioOwnerId={portfolioOwnerId} isEditable={isEditable} />
+    <AuthContextProvider>
+      <CardFrame
+        portfolioOwnerId={portfolioOwnerId}
+        isEditable={isEditable}
+        DATA_ENDPOINT={'projects'}
+      />
+    </AuthContextProvider>
   );
 };
 
