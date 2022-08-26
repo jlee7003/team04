@@ -20,14 +20,16 @@ const EditForm = (props) => {
       ...dataValues,
     };
 
-    context.setIdList(context.idList.filter((id) => id !== projectId));
+    context.setEditIdList(context.editIdList.filter((id) => id !== projectId));
 
     await Api.patch(props.DATA_ENDPOINT, projectId, editedValues);
     await props.callFetch();
   };
 
-  const deleteId = () => {
-    context.setIdList(context.idList.filter((id) => id !== props.project.id));
+  const deleteIdFromIdList = () => {
+    context.setEditIdList(
+      context.editIdList.filter((id) => id !== props.project.id)
+    );
   };
 
   return (
@@ -69,7 +71,7 @@ const EditForm = (props) => {
       <CheckButton
         className={'mt-3 text-center'}
         submitHandler={confirmEdit}
-        cancelHandler={deleteId}
+        cancelHandler={deleteIdFromIdList}
         project={props.project}
       />
     </Form>

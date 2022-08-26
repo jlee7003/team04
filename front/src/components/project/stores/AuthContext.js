@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
 const AuthContext = React.createContext({
-  idList: [],
+  editIdList: [],
   setIdList: () => {},
-  getIdList: () => {},
-  setIsAdding: false,
+  isAdding: false,
+  setIsAdding: () => {},
 });
 
 export const AuthContextProvider = (props) => {
-  const [idList, setIdList] = useState([]);
+  const [editIdList, setEditIdList] = useState([]);
   const [isAdding, setIsAdding] = useState(false);
 
   return (
@@ -16,8 +16,8 @@ export const AuthContextProvider = (props) => {
       value={{
         isAdding,
         setIsAdding,
-        idList,
-        setIdList,
+        editIdList,
+        setEditIdList,
       }}
     >
       {props.children}

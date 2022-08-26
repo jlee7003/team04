@@ -21,8 +21,8 @@ const EditDeleteButton = (props) => {
   };
 
   const getIdList = (id) => {
-    context.setIdList((prevState) =>
-      context.idList.includes(id) ? prevState : [...prevState, id]
+    context.setEditIdList((prevState) =>
+      context.editIdList.includes(id) ? prevState : [...prevState, id]
     );
   };
 

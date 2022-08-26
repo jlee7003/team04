@@ -8,7 +8,7 @@ const CardElement = (props) => {
   const context = useContext(AuthContext);
 
   return props.data.map((project) =>
-    context.idList.includes(project.id) ? (
+    context.editIdList.includes(project.id) ? (
       <EditForm
         project={project}
         key={project.id}
