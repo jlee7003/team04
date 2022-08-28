@@ -13,6 +13,8 @@ function Portfolio() {
   const navigate = useNavigate();
   const params = useParams();
   const [portfolioOwner, setPortfolioOwner] = useState(null);
+  
+
   // fetchPorfolioOwner 함수가 완료되면(isFetchCompleted가 true) 컴포넌트 구현
   // 아래 코드를 보면, isFetchCompleted가 false이면 "loading..."만 반환되어서, 화면에 이 로딩 문구만 뜨게 됨.
   const [isFetchCompleted, setIsFetchCompleted] = useState(false);
@@ -51,8 +53,36 @@ function Portfolio() {
     return 'loading...';
   }
 
+  
+// 감상모드 vs 편집모드
+  const displayToggler = (e) => {
+    e.preventDefault()
+    const firstTargetElement = document.querySelector('.toggleTarget')
+
+    // 편집 모드로 변환
+    if(firstTargetElement.classList.contains('display-none')){
+      e.target.style.opacity = '0.5';
+      console.log('편집 모드로')
+      const targetElement = document.querySelectorAll('.toggleTarget')
+      targetElement.forEach( ele => {
+        ele.classList.remove('display-none')
+      })
+    }
+    // 감상 모드로 변환
+    else{
+      console.log('감상 모드로')
+      e.target.style.opacity = '1';
+
+      // e.target.setAttribute('data-value', 'ㅁㄴㅇㄹ');
+
+      const targetElement = document.querySelectorAll('.toggleTarget')
+      targetElement.forEach( ele => {
+        ele.classList.add('display-none')
+      })
+    }
+  }
+  
   let isEditable = portfolioOwner.id === userState.user?.id ? true : false;
-  // console.log(params.userId), "params.userId";
 
   return (
     <Container fluid>
@@ -62,16 +92,33 @@ function Portfolio() {
         </Col>
         <Col>
           <div>
-            <Education isEditable={isEditable} paramsUserId={params.userId} />
-            <Award isEditable={isEditable} paramsUserId={params.userId} />
+          <button onClick={displayToggler} style={{
+              position:'fixed',
+              color:'red',
+              zIndex:'99',
+              top: '91%',
+              left: '5%',
+              opacity: '0.5',
+            }}>👀</button>
+
+            <Education 
+              isEditable={isEditable} 
+              paramsUserId={params.userId} />
+            <Award 
+              isEditable={isEditable} 
+              paramsUserId={params.userId} />
             <Project
               portfolioOwnerId={portfolioOwner.id}
               isEditable={isEditable}
             />
-            <Certificate isEditable={isEditable} paramsUserId={params.userId} />
+            <Certificate 
+              isEditable={isEditable} 
+              paramsUserId={params.userId} 
+            />
           </div>
         </Col>
       </Row>
+      
     </Container>
   );
 }

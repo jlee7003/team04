@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import * as Api from "../../api";
 import { useState, useContext } from "react";
 import { UserStateContext } from "../../App";
+import displayToggleCss from "../styles/displayToggle.css";
 
 const CertificateCard = (props) => {
   const userState = useContext(UserStateContext);
@@ -15,18 +16,17 @@ const CertificateCard = (props) => {
   const setArr = props.setArr;
   const idx = props.idx;
 
-  const 편집 = (e) => {
+  // 카드 편집기 열기 (CertificateEditForm 컴포넌트)
+  const openEditForm = (e) => {
     setEleID(e.target.parentNode.parentNode.id);
     setIsEditing(true);
   };
 
-  const 삭제 = async (e) => {
-    // DELETE
+  // 카드 삭제
+  const deleteCard = async (e) => {
     const eleID = e.target.parentNode.parentNode.id;
-
     await Api.delete("certificates", eleID);
 
-    // GET
     const getRes = await Api.get("certificates", id);
     const datas = getRes.data;
     let dataArr = [];
@@ -41,16 +41,18 @@ const CertificateCard = (props) => {
         <div>{arr[idx][2]}</div>
         <div>{arr[idx][3]}</div>
       </div>
-      {props.isEditable ? (
+      
+      {props.isEditable &&(
         <div className="col">
-          <Button variant="btn float-end btn-outline-info mt-3" onClick={삭제}>
+          <Button css={{displayToggleCss}} variant="btn float-end btn-outline-info mt-3 toggleTarget" onClick={deleteCard}>
             삭제
           </Button>
-          <Button variant="btn float-end btn-outline-info mt-3" onClick={편집}>
+          <Button css={{displayToggleCss}} variant="btn float-end btn-outline-info mt-3 toggleTarget" onClick={openEditForm}>
             편집
           </Button>
         </div>
-      ) : null}
+      )}
+
       <div className="mt-3"></div>
       {isEditing && (
         <CertificateEditForm
