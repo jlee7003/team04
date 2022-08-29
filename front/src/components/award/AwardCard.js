@@ -17,7 +17,6 @@ const AwardCard = (props) => {
   const setArr = props.setArr;
   const idx = props.idx;
 
-  // 2클릭 삭제
   const [isConfirm, setConfirm] = useState(false);
   const target = useRef(null);
 
@@ -27,15 +26,12 @@ const AwardCard = (props) => {
     }, 2000);
     return () => clearTimeout(timer);
   }, [isConfirm]);
-  // ~~~~~~~~
 
-  // 카드 편집창 열기 (작업은 AwardEditForm 컴포넌트에서 처리)
   const openEditForm = (e) => {
     setEleID(e.target.parentNode.parentNode.id);
     setIsEditing(true);
   };
 
-  // 카드 삭제 (delete + get)
   const confirmDelete = async (e) => {
     const eleID = e.target.parentNode.parentNode.id;
     await Api.delete("awards", eleID);

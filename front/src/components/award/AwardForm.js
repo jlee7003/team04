@@ -11,7 +11,6 @@ const AwardForm = (props) => {
   const [details, setDetails] = useState("");
   const [isEmpty, setIsEmpty] = useState(true);
 
-  // Posting
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (award === "" || details === "") {
@@ -35,7 +34,6 @@ const AwardForm = (props) => {
     dataArr = datas.map((ele) => [ele.id, ele.title, ele.description]);
     props.setArr(dataArr);
 
-    // 제출 시 입력창 초기화
     setAward("");
     setDetails("");
   };

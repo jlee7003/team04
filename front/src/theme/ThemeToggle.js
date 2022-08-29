@@ -2,17 +2,12 @@ import styled from "styled-components";
 import React, { useState, useContext } from "react";
 import { UserStateContext } from "../App";
 function ThemeToggle({ toggle, mode }) {
-  let [watchItem, setWatch] = useState([]);
   let origin = localStorage.getItem("recentlyView1");
-  // origin = JSON.parse(origin);
-  // setWatch(origin);
   const userState = useContext(UserStateContext);
   const id = null;
   if (id) {
     id = userState.user.id;
   }
-  console.log(id, "idd");
-  console.log(origin, "origin");
 
   return (
     <div
@@ -30,35 +25,12 @@ function ThemeToggle({ toggle, mode }) {
         border: `1px solid rgba(0,0,0,.125)`,
       }}
     >
-      {/* {watchItem.map((item) => {
-        if (watchItem.length > 3) {
-          let copy = [...watchItem];
-          copy.shift();
-          setWatch(copy);
-        } else {
-          return (
-            <div>
-              <div to={"/detail/" + item}>
-                <img
-                  src={
-                    "https://codingapple1.github.io/shop/shoes" +
-                    (Number(item) + 1) +
-                    ".jpg"
-                  }
-                />
-              </div>
-            </div>
-          );
-        }
-      })} */}
-
       <ToggleWrapper onClick={toggle} mode={mode}>
         {mode === "dark" ? "🌚" : "🌝"}
       </ToggleWrapper>
     </div>
   );
 }
-//bottom: 4%;
 export default ThemeToggle;
 const ToggleWrapper = styled.button`
   background-color: ${(props) => props.theme.bgColor};

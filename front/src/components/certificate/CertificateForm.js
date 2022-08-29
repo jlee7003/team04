@@ -12,20 +12,15 @@ const CertificateForm = (props) => {
   const [day, setDay] = useState("");
   const [isEmpty, setIsEmpty] = useState(true);
 
-  // 제출 post + get
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // 빈 값 방지
     if (certificate === "" || details === "" || day === "") {
       setIsEmpty(false);
       return;
     } else {
       setIsEmpty(true);
     }
-
-    console.log(day);
-    console.log(typeof day);
 
     const certificateObj = {
       title: certificate,
@@ -41,7 +36,6 @@ const CertificateForm = (props) => {
     dataArr = datas.map((ele) => [ele.id, ele.title, ele.content, ele.day]);
     props.setArr(dataArr);
 
-    // 입력창 초기화
     setCertificate("");
     setDetails("");
     setDay("");

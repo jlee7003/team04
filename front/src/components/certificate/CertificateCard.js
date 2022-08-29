@@ -13,11 +13,10 @@ const CertificateCard = (props) => {
   const [isEditing, setIsEditing] = useState(false);
   const [eleID, setEleID] = useState(false);
 
-  const arr = props.arr; // arr : [수상, 상세, 시간ID]
+  const arr = props.arr;
   const setArr = props.setArr;
   const idx = props.idx;
 
-  // 2클릭 삭제
   const [isConfirm, setConfirm] = useState(false);
   const target = useRef(null);
 
@@ -27,15 +26,12 @@ const CertificateCard = (props) => {
     }, 2000);
     return () => clearTimeout(timer);
   }, [isConfirm]);
-  // ~~~~~~~~
 
-  // 카드 편집기 열기 (CertificateEditForm 컴포넌트)
   const openEditForm = (e) => {
     setEleID(e.target.parentNode.parentNode.id);
     setIsEditing(true);
   };
 
-  // 카드 삭제
   const confirmDelete = async (e) => {
     const eleID = e.target.parentNode.parentNode.id;
     await Api.delete("certificates", eleID);

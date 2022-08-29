@@ -15,7 +15,6 @@ const CertificateEditForm = (props) => {
   let isClicked = false;
   let isEmpty = false;
 
-  // 편집본 제출
   const submitEditForm = async (e) => {
     e.preventDefault();
 
@@ -36,15 +35,12 @@ const CertificateEditForm = (props) => {
     };
     await Api.patch("certificates", certID, obj);
 
-    // GET
     getData();
 
-    // 제출 시 입력창 초기화
     setCertificate("");
     setDetails("");
     setDay("");
 
-    // 제출 시 편집창 닫기
     props.setIsEditing(false);
   };
 

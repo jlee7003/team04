@@ -26,7 +26,6 @@ const AwardEditForm = (props) => {
       return;
     }
 
-    // UPDATE
     const awardID = props.eleID;
     const awardObj = {
       title: award,
@@ -34,14 +33,11 @@ const AwardEditForm = (props) => {
     };
     const updateRes = await Api.patch("awards", awardID, awardObj);
 
-    // GET
     getData();
 
-    // 제출 시 입력창 초기화
     setAward("");
     setDetails("");
 
-    // 제출 시 편집창 닫기
     props.setIsEditing(false);
   };
 

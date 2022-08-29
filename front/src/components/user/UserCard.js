@@ -3,10 +3,8 @@ import { Card, Row, Button, Col } from "react-bootstrap";
 import React, { useContext, useState, useEffect } from "react";
 import { UserStateContext } from "../../App";
 function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
-  const [saveUser, setSaveUser] = useState();
   let [watchItem, setWatch] = useState([]);
   let watch = [];
-  let suser = [];
   const navigate = useNavigate();
   const userState = useContext(UserStateContext);
   const id = userState.user.id;
@@ -29,15 +27,10 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
     } else {
       watch = JSON.stringify(watch);
     }
-    // user = JSON.parse(user);
     if (user && Array.isArray(user)) {
-      // if (user && Array.isArray(user)) {
       userstr = JSON.stringify({ name: user.name, id: user.id });
-      console.log(userstr, "pppppppppp");
       watch.push(userstr);
-      // watch.push(user.id, user.name);
     }
-    console.log(typeof user);
     if (watch.length <= 3) {
       watch = new Set(watch);
       watch = [...watch];
