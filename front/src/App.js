@@ -9,9 +9,7 @@ import LoginForm from "./components/user/LoginForm";
 import Network from "./components/user/Network";
 import RegisterForm from "./components/user/RegisterForm";
 import Portfolio from "./components/Portfolio";
-// 다크
-import { ThemeProvider } from "./context/themeProvider";
-import { GlobalStyle } from "./theme/GlobalStyles";
+
 export const UserStateContext = createContext(null);
 export const DispatchContext = createContext(null);
 
@@ -29,7 +27,6 @@ function App() {
     try {
       // 이전에 발급받은 토큰이 있다면, 이를 가지고 유저 정보를 받아옴.
       const res = await Api.get("user/current");
-      console.log(res, "res");
       const currentUser = res.data;
 
       // dispatch 함수를 통해 로그인 성공 상태로 만듦.
@@ -59,18 +56,15 @@ function App() {
     <DispatchContext.Provider value={dispatch}>
       <UserStateContext.Provider value={userState}>
         <Router>
-          <ThemeProvider>
-            <GlobalStyle />
-            <Header />
-            <Routes>
-              <Route path="/" exact element={<Portfolio />} />
-              <Route path="/login" element={<LoginForm />} />
-              <Route path="/register" element={<RegisterForm />} />
-              <Route path="/users/:userId" element={<Portfolio />} />
-              <Route path="/network" element={<Network />} />
-              <Route path="*" element={<Portfolio />} />
-            </Routes>
-          </ThemeProvider>
+          <Header />
+          <Routes>
+            <Route path="/" exact element={<Portfolio />} />
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/register" element={<RegisterForm />} />
+            <Route path="/users/:userId" element={<Portfolio />} />
+            <Route path="/network" element={<Network />} />
+            <Route path="*" element={<Portfolio />} />
+          </Routes>
         </Router>
       </UserStateContext.Provider>
     </DispatchContext.Provider>

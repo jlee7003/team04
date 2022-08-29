@@ -1,36 +1,23 @@
-import React, { useState, useEffect, useContext } from 'react';
-import * as Api from '../../../api';
+import React, { useState, useEffect, useContext } from "react";
+import * as Api from "../../../api";
 
-import AuthContext from '../stores/AuthContext';
-import CardElement from '../CardElement';
-import AddForm from './AddForm';
-import AddButton from './AddButton';
-import { Card } from 'react-bootstrap';
+import AuthContext from "../stores/AuthContext";
+import CardElement from "../CardElement";
+import AddForm from "./AddForm";
+import AddButton from "./AddButton";
+import { Card } from "react-bootstrap";
 
 const CardFrame = ({ portfolioOwnerId, isEditable }) => {
   const context = useContext(AuthContext);
-  const USER_ENDPOINT = 'users';
-  const DATA_ENDPOINT = 'projects';
+  const USER_ENDPOINT = "users";
+  const DATA_ENDPOINT = "projects";
   const [data, setData] = useState([]);
 
-  const getUserInfo = async (userEndpoint, portfolioOwnerId) => {
-    const getUser = await Api.get(userEndpoint, portfolioOwnerId);
-    const userInfo = { ...getUser.data };
-
-    return userInfo;
-  };
-
-  const getFetchedData = async (dataEndpoint, userId) => {
-    const getData = await Api.get(dataEndpoint, userId);
-    const fetchedData = [...getData.data];
-
-    return fetchedData;
-  };
-
   const callFetch = async () => {
-    const userInfo = await getUserInfo(USER_ENDPOINT, portfolioOwnerId);
-    const fetchedData = await getFetchedData(DATA_ENDPOINT, userInfo.id);
-
+    const getUser = await Api.get(USER_ENDPOINT, portfolioOwnerId);
+    const userInfo = { ...getUser.data };
+    const getData = await Api.get(DATA_ENDPOINT, userInfo.id);
+    const fetchedData = [...getData.data];
     setData(fetchedData);
   };
 

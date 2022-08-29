@@ -5,7 +5,7 @@ import { Container, Col, Row, Form, Button } from "react-bootstrap";
 import * as Api from "../../api";
 import { DispatchContext } from "../../App";
 
-function LoginForm({isEditable}) {
+function LoginForm({ isEditable }) {
   const navigate = useNavigate();
   const dispatch = useContext(DispatchContext);
 
@@ -53,8 +53,8 @@ function LoginForm({isEditable}) {
       });
 
       // 기본 페이지로 이동함.
-      // navigate("/", { replace: true }); // 원래 코드 
-      navigate("/", { state:{email} });
+      // navigate("/", { replace: true }); // 원래 코드
+      navigate("/", { state: { email } });
     } catch (err) {
       console.log("로그인에 실패하였습니다.\n", err);
     }
@@ -65,8 +65,6 @@ function LoginForm({isEditable}) {
       <Row className="justify-content-md-center mt-5">
         <Col lg={8}>
           <Form onSubmit={handleSubmit}>
-
-            
             <Form.Group controlId="loginEmail">
               <Form.Label>이메일 주소</Form.Label>
               <Form.Control
@@ -81,7 +79,6 @@ function LoginForm({isEditable}) {
                 </Form.Text>
               )}
             </Form.Group>
-
 
             <Form.Group controlId="loginPassword" className="mt-3">
               <Form.Label>비밀번호</Form.Label>
@@ -98,7 +95,6 @@ function LoginForm({isEditable}) {
               )}
             </Form.Group>
 
-
             <Form.Group as={Row} className="mt-3 text-center">
               <Col sm={{ span: 20 }}>
                 <Button variant="primary" type="submit" disabled={!isFormValid}>
@@ -107,7 +103,6 @@ function LoginForm({isEditable}) {
               </Col>
             </Form.Group>
 
-
             <Form.Group as={Row} className="mt-3 text-center">
               <Col sm={{ span: 20 }}>
                 <Button variant="light" onClick={() => navigate("/register")}>
@@ -115,8 +110,6 @@ function LoginForm({isEditable}) {
                 </Button>
               </Col>
             </Form.Group>
-
-
           </Form>
         </Col>
       </Row>

@@ -1,17 +1,17 @@
-import React, { useState, useContext } from 'react';
-import * as Api from '../../../api';
+import React, { useState, useContext } from "react";
+import * as Api from "../../../api";
 
-import AuthContext from '../stores/AuthContext';
-import CheckButton from './CheckButton';
-import { Form, Col, FloatingLabel } from 'react-bootstrap';
+import AuthContext from "../stores/AuthContext";
+import CheckButton from "./CheckButton";
+import { Form, Col, FloatingLabel } from "react-bootstrap";
 
 const AddForm = (props) => {
   const context = useContext(AuthContext);
-  const [dataValues, setDataValues] = useState({});
+  const [dataValues, setdataValues] = useState({});
 
-  const setProjectValues = (e) => {
+  const onChangeHandler = (e) => {
     const { name, value } = e.target;
-    setDataValues({ ...dataValues, [name]: value });
+    setdataValues({ ...dataValues, [name]: value });
   };
 
   const callPost = async () => {
@@ -32,7 +32,7 @@ const AddForm = (props) => {
             name="title"
             type="text"
             placeholder="프로젝트 제목"
-            onChange={setProjectValues}
+            onChange={onChangeHandler}
           />
         </FloatingLabel>
       </Form.Group>
@@ -42,7 +42,7 @@ const AddForm = (props) => {
             name="content"
             type="text"
             placeholder="상세 내역"
-            onChange={setProjectValues}
+            onChange={onChangeHandler}
           />
         </FloatingLabel>
       </Form.Group>
@@ -51,15 +51,15 @@ const AddForm = (props) => {
           <Form.Control
             type="date"
             name="startDay"
-            onChange={setProjectValues}
+            onChange={onChangeHandler}
           />
         </Col>
         <Col className="col-auto">
-          <Form.Control type="date" name="endDay" onChange={setProjectValues} />
+          <Form.Control type="date" name="endDay" onChange={onChangeHandler} />
         </Col>
       </Form.Group>
       <CheckButton
-        className={'mt-3 text-center'}
+        className={"mt-3 text-center"}
         submitHandler={callPost}
         cancelHandler={setIsAddingFalse}
       />

@@ -1,15 +1,15 @@
-import React, { useState, useContext } from 'react';
-import * as Api from '../../../api';
+import React, { useState, useContext } from "react";
+import * as Api from "../../../api";
 
-import AuthContext from '../stores/AuthContext';
-import CheckButton from './CheckButton';
-import { Form, Col, FloatingLabel } from 'react-bootstrap';
+import AuthContext from "../stores/AuthContext";
+import CheckButton from "./CheckButton";
+import { Form, Col, FloatingLabel } from "react-bootstrap";
 
 const EditForm = (props) => {
   const context = useContext(AuthContext);
   const [dataValues, setDataValues] = useState({});
 
-  const setProjectValues = (e) => {
+  const onChangeHandler = (e) => {
     const { name, value } = e.target;
     setDataValues({ ...dataValues, [name]: value });
   };
@@ -37,7 +37,7 @@ const EditForm = (props) => {
           <Form.Control
             name="title"
             type="text"
-            onChange={setProjectValues}
+            onChange={onChangeHandler}
             defaultValue={props.project.title}
           />
         </FloatingLabel>
@@ -47,7 +47,7 @@ const EditForm = (props) => {
           <Form.Control
             name="content"
             type="text"
-            onChange={setProjectValues}
+            onChange={onChangeHandler}
             defaultValue={props.project.content}
           />
         </FloatingLabel>
@@ -57,7 +57,7 @@ const EditForm = (props) => {
           <Form.Control
             name="startDay"
             type="date"
-            onChange={setProjectValues}
+            onChange={onChangeHandler}
             defaultValue={props.project.startDay}
           />
         </Col>
@@ -65,13 +65,13 @@ const EditForm = (props) => {
           <Form.Control
             name="endDay"
             type="date"
-            onChange={setProjectValues}
+            onChange={onChangeHandler}
             defaultValue={props.project.endDay}
           />
         </Col>
       </Form.Group>
       <CheckButton
-        className={'mt-3 text-center'}
+        className={"mt-3 text-center"}
         submitHandler={confirmEdit}
         cancelHandler={deleteIdFromIdList}
         project={props.project}

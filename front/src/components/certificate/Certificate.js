@@ -4,6 +4,7 @@ import { UserStateContext } from "../../App";
 import CertificateCard from "./CertificateCard";
 import CertificateForm from "./CertificateForm";
 import * as Api from "../../api";
+import displayToggleCss from "../styles/displayToggle.css";
 
 const Certificate = ({ isEditable, paramsUserId }) => {
   const userState = useContext(UserStateContext);
@@ -51,13 +52,16 @@ const Certificate = ({ isEditable, paramsUserId }) => {
             alignItems: "flex-end",
           }}
         >
-          <Button
-            className="btn btn-primary"
-            onClick={() => setIsEditing(true)}
-            style={!isEditable ? { display: "none" } : { display: "block" }}
-          >
-            +
-          </Button>
+          {isEditable && (
+            <>
+              <Button
+                className="btn btn-primary toggleTarget"
+                onClick={() => setIsEditing(true)}
+              >
+                +
+              </Button>
+            </>
+          )}
         </div>
         {isEditing && (
           <CertificateForm
