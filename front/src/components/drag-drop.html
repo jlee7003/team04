@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <title>JS - File Drag and Drop</title>
+</head>
+
+<style>
+  .drop-zone {
+    width: 500px;
+    height: 500px;
+    background-color: azure
+  }
+
+  .drop-zone-dragenter,
+  .drop-zone-dragover {
+    border: 10px solid blue;
+  }
+</style>
+
+<body>
+
+  <form>
+    <input type="file" id="file" multiple>
+    <div class="drop-zone">
+      또는 파일을 여기로 드래그하세요.
+    </div>
+  </form>
+
+  <script>
+    (function () {
+
+      var $file = document.getElementById("file")
+      var dropZone = document.querySelector(".drop-zone")
+
+      var toggleClass = function (className) {
+
+        console.log("current event: " + className)
+
+        var list = ["dragenter", "dragleave", "dragover", "drop"]
+
+        for (var i = 0; i < list.length; i++) {
+          if (className === list[i]) {
+            dropZone.classList.add("drop-zone-" + list[i])
+          } else {
+            dropZone.classList.remove("drop-zone-" + list[i])
+          }
+        }
+      }
+
+      var showFiles = function (files) {
+        dropZone.innerHTML = ""
+        for (var i = 0, len = files.length; i < len; i++) {
+          dropZone.innerHTML += "<p>" + files[i].name + "</p>"
+        }
+      }
+
+      var selectFile = function (files) {
+        // input file 영역에 드랍된 파일들로 대체
+        $file.files = files
+        showFiles($file.files)
+      }
+
+      $file.addEventListener("change", function (e) {
+        showFiles(e.target.files)
+      })
+
+      // 드래그한 파일이 최초로 진입했을 때
+      dropZone.addEventListener("dragenter", function (e) {
+        e.stopPropagation()
+        e.preventDefault()
+        toggleClass("dragenter")
+      })
+
+      // 드래그한 파일이 dropZone 영역을 벗어났을 때
+      dropZone.addEventListener("dragleave", function (e) {
+        e.stopPropagation()
+        e.preventDefault()
+        toggleClass("dragleave")
+      })
+
+      // 드래그한 파일이 dropZone 영역에 머물러 있을 때
+      dropZone.addEventListener("dragover", function (e) {
+        e.stopPropagation()
+        e.preventDefault()
+        toggleClass("dragover")
+      })
+
+      // 드래그한 파일이 드랍되었을 때
+      dropZone.addEventListener("drop", function (e) {
+        e.preventDefault()
+        toggleClass("drop")
+        var files = e.dataTransfer && e.dataTransfer.files
+        console.log(files)
+        if (files != null) {
+          if (files.length < 1) {
+            alert("폴더 업로드 불가")
+            return
+          }
+          selectFile(files)
+        } else {
+          alert("ERROR")
+        }
+      })
+    })();
+  </script>
+</body>
+</html>
+
+
+<!-- 
+
+<input type=file>에서 multiple 속성을 추가하면 여러 파일을 입력받을 수 있습니다.
+
+drop-zone 이라는 클래스의 첫 번째 요소에 파일을 드래그 앤 드랍하면 이벤트가 발생합니다.
+
+드래그 앤 드랍 이벤트에서 자주 사용되는 속성은 dragover, drop 입니다. 
+
+dragover : 드래그한 파일들이 영역 안에 들어가 있을 때, 
+drop :은 마우스 버튼을 떼고 드랍되었을 때 발생하는 이벤트입니다.
+
+브라우저 기본 동작 방지와 버블링 방지 목적으로 e.preventDefault(), e.stopPropagation()을 추가합니다. (관련 글)
+
+selectFile 함수에서 input file을 대체하는 작업을 수행합니다. 이 예제는 여러 파일이 허용된다는 전제하에 저렇게 작성되었고, 만약 단일 파일만 허용해야 한다면 방어 코드를 작성해 파일 입력이 되지 않도록 하거나 또는  아래와 같이 첫 번째 파일만 대체되도록 하세요.
+$file.files[0] = files[0]
+
+드랍된 파일이 정상적인 파일인 경우 파일들은 e.dataTransfer.files에 담기게 됩니다. 
+
+http://yoonbumtae.com/?p=3225
+-->

@@ -61,24 +61,23 @@ function Portfolio() {
 
     // 편집 모드로 변환
     if(firstTargetElement.classList.contains('display-none')){
-      e.target.style.opacity = '0.5';
       console.log('편집 모드로')
       const targetElement = document.querySelectorAll('.toggleTarget')
       targetElement.forEach( ele => {
         ele.classList.remove('display-none')
       })
+      const editButton = document.querySelector('#editbutton')
+      editButton.innerText = '✏️'
     }
     // 감상 모드로 변환
     else{
       console.log('감상 모드로')
-      e.target.style.opacity = '1';
-
-      // e.target.setAttribute('data-value', 'ㅁㄴㅇㄹ');
-
       const targetElement = document.querySelectorAll('.toggleTarget')
       targetElement.forEach( ele => {
         ele.classList.add('display-none')
       })
+      const editButton = document.querySelector('#editbutton')
+      editButton.innerText = '👀'
     }
   }
   
@@ -92,14 +91,18 @@ function Portfolio() {
         </Col>
         <Col>
           <div>
-          <button onClick={displayToggler} style={{
+          <button id='editbutton' onClick={displayToggler} style={{
+              width:'50px',
+              height:'50px',
               position:'fixed',
               color:'red',
               zIndex:'99',
-              top: '91%',
-              left: '5%',
-              opacity: '0.5',
-            }}>👀</button>
+              bottom: '5%',
+              right: '20%',
+              borderColor:'gray',
+              borderRadius: '50%',
+              backgroundColor: 'aliceblue'
+            }}>✏️</button>
 
             <Education 
               isEditable={isEditable} 

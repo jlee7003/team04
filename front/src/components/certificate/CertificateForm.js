@@ -25,6 +25,9 @@ const CertificateForm = (props) => {
       setIsEmpty(true);
     }
     
+    console.log(day)
+    console.log(typeof day)
+
     const certificateObj = {
       title: certificate,
       content: details,
