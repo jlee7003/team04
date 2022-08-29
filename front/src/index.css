@@ -6,6 +6,9 @@ body {
 .inputwidth {
   width: 100%;
 }
+.white {
+  color: white;
+}
 .margin10 {
   margin: 10px;
 }
