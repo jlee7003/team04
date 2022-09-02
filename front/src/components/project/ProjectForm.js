@@ -83,7 +83,6 @@ const ProjectForm = (props) => {
             type="text"
             placeholder="프로젝트 제목"
             onChange={setProjectValues}
-            value={dataValues.title}
             maxLength="20"
           />
         </FloatingLabel>
@@ -99,7 +98,6 @@ const ProjectForm = (props) => {
             type="text"
             placeholder="상세 내역"
             onChange={setProjectValues}
-            value={dataValues.content}
             maxLength="400"
           />
         </FloatingLabel>
@@ -109,17 +107,11 @@ const ProjectForm = (props) => {
           <Form.Control
             type="date"
             name="startDay"
-            value={dataValues.startDay}
             onChange={setProjectValues}
           />
         </Col>
         <Col className="col-auto">
-          <Form.Control
-            type="date"
-            name="endDay"
-            onChange={setProjectValues}
-            value={dataValues.endDay}
-          />
+          <Form.Control type="date" name="endDay" onChange={setProjectValues} />
         </Col>
       </Form.Group>
       <Form.Group className={`mt-3 text-center mb-3`}>

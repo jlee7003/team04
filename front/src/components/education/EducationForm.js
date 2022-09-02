@@ -16,7 +16,6 @@ const EducationForm = ({ onConfirm, onCancel, education, byEditbtn }) => {
   const id = userState?.user?.id;
 
   const [isEmpty, setIsEmpty] = useState(true);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setTargetEducation({
@@ -24,21 +23,17 @@ const EducationForm = ({ onConfirm, onCancel, education, byEditbtn }) => {
       [name]: value,
     });
   };
-
   const editedValues = {
     ...targetEducation,
   };
-
   const handleConfirm = async (e) => {
     e.preventDefault();
-
     if (targetEducation.school === '' || targetEducation.major === '') {
       setIsEmpty(false);
       return;
     } else {
       setIsEmpty(true);
     }
-
     try {
       if (!byEditbtn) {
         onConfirm({ ...targetEducation });
@@ -111,12 +106,12 @@ const EducationForm = ({ onConfirm, onCancel, education, byEditbtn }) => {
             type="radio"
             id="radio-add-1"
             className="form-check-input"
-            value="재학 중"
-            checked={targetEducation.position === '재학 중'}
+            value="재학중"
+            checked={targetEducation.position === '재학중'}
             onChange={handleChange}
           ></input>
           <label title="" htmlFor="radio-add-1" className="form-check-label">
-            재학 중
+            재학중
           </label>
         </div>
         <div className="form-check form-check-inline">
@@ -125,12 +120,12 @@ const EducationForm = ({ onConfirm, onCancel, education, byEditbtn }) => {
             type="radio"
             id="radio-add-2"
             className="form-check-input"
-            value="학사 졸업"
-            checked={targetEducation.position === '학사 졸업'}
+            value="학사졸업"
+            checked={targetEducation.position === '학사졸업'}
             onChange={handleChange}
           ></input>
           <label title="" htmlFor="radio-add-2" className="form-check-label">
-            학사 졸업
+            학사졸업
           </label>
         </div>
         <div className="form-check form-check-inline">
@@ -139,12 +134,12 @@ const EducationForm = ({ onConfirm, onCancel, education, byEditbtn }) => {
             type="radio"
             id="radio-add-3"
             className="form-check-input"
-            value="석사 졸업"
-            checked={targetEducation.position === '석사 졸업'}
+            value="석사졸업"
+            checked={targetEducation.position === '석사졸업'}
             onChange={handleChange}
           ></input>
           <label title="" htmlFor="radio-add-3" className="form-check-label">
-            석사 졸업
+            석사졸업
           </label>
         </div>
         <div className="form-check form-check-inline">
@@ -153,12 +148,12 @@ const EducationForm = ({ onConfirm, onCancel, education, byEditbtn }) => {
             type="radio"
             id="radio-add-4"
             className="form-check-input"
-            value="박사 졸업"
-            checked={targetEducation.position === '박사 졸업'}
+            value="박사졸업"
+            checked={targetEducation.position === '박사졸업'}
             onChange={handleChange}
           ></input>
           <label title="" htmlFor="radio-add-4" className="form-check-label">
-            박사 졸업
+            박사졸업
           </label>
         </div>
       </div>
