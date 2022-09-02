@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const AuthContext = React.createContext({
   editIdList: [],
-  setIdList: () => {},
+  setEditIdList: () => {},
   isAdding: false,
   setIsAdding: () => {},
 });

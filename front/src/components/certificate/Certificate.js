@@ -4,7 +4,7 @@ import { UserStateContext } from '../../App';
 import { useLocation } from 'react-router';
 import CertificateCard from './CertificateCard';
 import CertificateForm from './CertificateForm';
-import { useTheme } from '../darkmode/themeProvider';
+import { useTheme } from '../stores/themeProvider';
 import '../../../src/styles/index.css';
 import * as Api from '../../api';
 import ErrorModalContext from '../stores/ErrorModalContext';
