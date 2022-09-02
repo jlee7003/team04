@@ -20,6 +20,7 @@ function Header() {
     dispatch({ type: 'LOGOUT' });
     navigate('/');
   };
+
   return (
     <Nav
       activeKey={location.pathname}
@@ -37,7 +38,6 @@ function Header() {
           </span>
         </Nav.Link>
       </Nav.Item>
-
       <div style={{ mediaQuery_header }} id="newline">
         <Nav.Item>
           <Nav.Link
@@ -47,7 +47,6 @@ function Header() {
             나의 페이지
           </Nav.Link>
         </Nav.Item>
-
         <Nav.Item>
           <Nav.Link
             id={theme === 'light' ? 'blight' : 'bdark'}
@@ -56,7 +55,6 @@ function Header() {
             네트워크
           </Nav.Link>
         </Nav.Item>
-
         {isLogin && (
           <Nav.Item>
             <Nav.Link

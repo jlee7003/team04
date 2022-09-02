@@ -16,25 +16,32 @@ function UserEditForm({ user, setIsEditing, setUser }) {
   const backendPortNumber = '5001';
   const serverUrl =
     'http://' + window.location.hostname + ':' + backendPortNumber + '/';
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (name === '' || description === '') {
       setIsEmpty(false);
       return;
     } else {
       setIsEmpty(true);
     }
+
     const res = await Api.put(`users/${user.id}`, {
       name,
       email,
       description,
     });
+
     const updatedUser = res.data;
+
     setUser(updatedUser);
+
     let value = '';
+
     for (value of formData.values()) {
     }
-    console.log(value.length);
+
     if (value.length !== 0) {
       await fetch(serverUrl + `user/images/profile`, {
         method: 'POST',
@@ -46,6 +53,7 @@ function UserEditForm({ user, setIsEditing, setUser }) {
     } else {
       console.log('사진을 첨부 안하셨습니다');
     }
+
     setIsEditing(false);
   };
 
@@ -72,7 +80,6 @@ function UserEditForm({ user, setIsEditing, setUser }) {
               maxLength="10"
             />
           </Form.Group>
-
           <Form.Group controlId="userEditEmail" className="mb-3">
             <Form.Control
               type="email"
@@ -82,7 +89,6 @@ function UserEditForm({ user, setIsEditing, setUser }) {
               onChange={(e) => setEmail(e.target.value)}
             />
           </Form.Group>
-
           <Form.Group controlId="userEditDescription" className="mb-3">
             <Form.Control
               type="text"
@@ -102,7 +108,6 @@ function UserEditForm({ user, setIsEditing, setUser }) {
               onChange={onImgChange}
             />
           </Form.Group>
-
           <Form.Group as={Row} className="mt-3 text-center">
             <Col sm={{ span: 20 }}>
               <Button variant="primary" type="submit" className="me-3">
