@@ -17,9 +17,11 @@ const Education = ({ isEditable, portfolioOwnerId }) => {
   const [educations, setEducations] = useState([]);
   const userState = useContext(UserStateContext);
   let educationid = '';
+
   if (userState?.user) {
     educationid = userState.user.id ? userState.user.id : null;
   }
+
   const confirmAddEducation = (targetEducation) => {
     const resultEducations = [...educations, targetEducation];
     setEducations([...resultEducations]);
@@ -30,12 +32,14 @@ const Education = ({ isEditable, portfolioOwnerId }) => {
   const cancelAddEducation = () => {
     setIsAdding(false);
   };
+
   useEffect(() => {
     Api.get(
       'educations',
       portfolioOwnerId ? portfolioOwnerId : educationid
     ).then((res) => setEducations(res.data));
   }, [portfolioOwnerId]);
+
   return (
     <Card className="mb-2 ms-3 mr-5 " id={theme == 'light' ? 'light' : 'dark'}>
       <Card.Body>
