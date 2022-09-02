@@ -53,7 +53,7 @@ const Certificate = ({ isEditable, portfolioOwnerId }) => {
   }
 
   return (
-    <Card className="mb-2 ms-3 mr-5" id={theme == 'light' ? 'light' : 'dark'}>
+    <Card className="mb-2 ms-3 mr-5" id={theme === 'light' ? 'light' : 'dark'}>
       <Card.Body>
         <Card.Title>자격증</Card.Title>
         {arr.map((certificate, idx) => {
