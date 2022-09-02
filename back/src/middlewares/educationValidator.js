@@ -55,7 +55,7 @@ exports.educationPatchValidator = () => {
         update.school = toUpdate.school;
       }
       if (toUpdate.major) {
-        if (toUpdate.major.length > 20) {
+        if (toUpdate.major.length > 200) {
           throw new Error(ERRORS.CONTENT_LENGTH_ERROR.errorCode);
         }
         update.major = toUpdate.major;
