@@ -47,7 +47,7 @@ const Award = ({ isEditable, portfolioOwnerId }) => {
   }
 
   return (
-    <Card className="mb-2 ms-3 mr-5" id={theme == 'light' ? 'light' : 'dark'}>
+    <Card className="mb-2 ms-3 mr-5" id={theme === 'light' ? 'light' : 'dark'}>
       <Card.Body>
         <Card.Title>수상 이력</Card.Title>
         {arr.map((ele, idx) => {

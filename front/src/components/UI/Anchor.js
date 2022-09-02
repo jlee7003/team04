@@ -15,7 +15,7 @@ const Anchor = () => {
 
   return (
     <ToggleWrapper
-      id={theme == 'light' ? 'light' : 'dark'}
+      id={theme === 'light' ? 'light' : 'dark'}
       onClick={goToTheTop}
     >
       ⬆️

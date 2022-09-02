@@ -23,7 +23,7 @@ const LatestViews = () => {
   return (
     <div
       className={
-        theme == 'light' ? 'sideBox hide light ' : 'sideBox hide dark '
+        theme === 'light' ? 'sideBox hide light ' : 'sideBox hide dark '
       }
     >
       <span className="mb-4" style={{ fontWeight: 'bold' }}>
