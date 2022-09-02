@@ -75,7 +75,7 @@ exports.projectPatchValidator = () => {
         update.startDay = toUpdate.startDay;
       }
       if (toUpdate.endDay) {
-        if (!regex.test(toUpdate.startDay)) {
+        if (!regex.test(toUpdate.endDay)) {
           throw new Error(ERRORS.DATE_FORMAT_ERROR.errorCode);
         }
         update.endDay = toUpdate.endDay;
