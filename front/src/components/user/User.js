@@ -20,15 +20,19 @@ function User({ portfolioOwnerId, isEditable, setIsEditable }) {
         let recentlyViewUserPortfolio = JSON.parse(
           localStorage.getItem(me.user.id) ?? '[]'
         );
+
         recentlyViewUserPortfolio = recentlyViewUserPortfolio.filter(
           (targetObj) =>
             targetObj.name !== recentlyViewUserPortfolioObj.name &&
             targetObj.id !== recentlyViewUserPortfolioObj.id
         );
+
         recentlyViewUserPortfolio.unshift(recentlyViewUserPortfolioObj);
+
         if (recentlyViewUserPortfolio.length > 5) {
           recentlyViewUserPortfolio.pop();
         }
+
         localStorage.setItem(
           me.user.id,
           JSON.stringify(recentlyViewUserPortfolio)
@@ -38,7 +42,7 @@ function User({ portfolioOwnerId, isEditable, setIsEditable }) {
   }, [user]);
 
   return (
-    <>
+    <React.Fragment>
       {isEditing ? (
         <UserEditForm
           user={user}
@@ -54,7 +58,7 @@ function User({ portfolioOwnerId, isEditable, setIsEditable }) {
           portfolioOwnerId={portfolioOwnerId}
         />
       )}
-    </>
+    </React.Fragment>
   );
 }
 

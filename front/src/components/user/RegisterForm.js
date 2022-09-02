@@ -70,7 +70,6 @@ function RegisterForm() {
                 </Form.Text>
               )}
             </Form.Group>
-
             <Form.Group controlId="registerPassword" className="mt-3">
               <Form.Label>비밀번호</Form.Label>
               <Form.Control
@@ -86,7 +85,6 @@ function RegisterForm() {
                 </Form.Text>
               )}
             </Form.Group>
-
             <Form.Group controlId="registerConfirmPassword" className="mt-3">
               <Form.Label>비밀번호 재확인</Form.Label>
               <Form.Control
@@ -102,7 +100,6 @@ function RegisterForm() {
                 </Form.Text>
               )}
             </Form.Group>
-
             <Form.Group controlId="registerName" className="mt-3">
               <Form.Label>이름</Form.Label>
               <Form.Control
@@ -118,11 +115,10 @@ function RegisterForm() {
                 </Form.Text>
               )}
             </Form.Group>
-
             <Form.Group as={Row} className="mt-3 text-center">
               <Col sm={{ span: 20 }}>
                 <Button variant="primary" type="submit" disabled={!isFormValid}>
-                  회원가입
+                  회원 가입
                 </Button>
               </Col>
             </Form.Group>
@@ -130,7 +126,7 @@ function RegisterForm() {
             <Form.Group as={Row} className="mt-3 text-center">
               <Col sm={{ span: 20 }}>
                 <Button variant="light" onClick={() => navigate('/login')}>
-                  로그인하기
+                  로그인 하기
                 </Button>
               </Col>
             </Form.Group>

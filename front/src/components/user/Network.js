@@ -24,6 +24,7 @@ function Network() {
       navigate('/login');
       return;
     }
+
     Api.get('userlist').then((res) => setUsers(res.data));
   }, [userState, navigate]);
 
@@ -40,9 +41,7 @@ function Network() {
           <Row xs="auto" className="jusify-content-center">
             {!isEmpty ? (
               users.map((user) => (
-                <>
-                  <UserCard key={user.id} user={user} isNetwork />
-                </>
+                <UserCard key={user.id} user={user} isNetwork />
               ))
             ) : searchData?.length === 0 ? (
               <div
@@ -56,9 +55,7 @@ function Network() {
               </div>
             ) : (
               searchData.map((user) => (
-                <>
-                  <UserCard key={user.id} user={user} isNetwork />
-                </>
+                <UserCard key={user.id} user={user} isNetwork />
               ))
             )}
           </Row>
