@@ -13,6 +13,7 @@ function EducationCard({ educations, setEducations, isEditable }) {
   const [isEditing, setIsEditing] = useState(false);
   const [byEditbtn, setByEditbtn] = useState(false);
   const [targetId, setTargetId] = useState(null);
+  const [clickID, setClickID] = useState();
   const userState = useContext(UserStateContext);
   const id = userState?.user?.id;
   let { state } = useLocation();
@@ -45,6 +46,7 @@ function EducationCard({ educations, setEducations, isEditable }) {
   const cancelEditEducation = () => {
     setIsEditing(false);
     setTargetId(null);
+    setClickID();
   };
 
   const onRemove = async (educationid) => {
@@ -59,7 +61,6 @@ function EducationCard({ educations, setEducations, isEditable }) {
         `${err.message} // 학력 데이터를 삭제하는 과정에서 문제가 발생했습니다.`
       );
     }
-    console.log("삭제 완료", educationid);
   };
 
   const EditHandle = () => {
@@ -73,15 +74,22 @@ function EducationCard({ educations, setEducations, isEditable }) {
           return (
             <div key={education.id} className="mb-4 card-text">
               <div className="align-items-center row">
-                {!isEditing && (
+                {education.id !== clickID && (
                   <div className="col">
                     <div className="text-muted">{education.school}</div>
-                    <div className="text-muted">
+                    <div
+                      className="text-muted"
+                      id="widthx"
+                      style={{ width: "584px" }}
+                    >
                       {education.major} ({education.position})
                     </div>
                   </div>
                 )}
-                {!isEditing && id === state && isEditable ? (
+                {!isEditing &&
+                id === state &&
+                isEditable &&
+                education.id !== clickID ? (
                   <Col className="col-lg-1 col">
                     <Button
                       variant="outline-info"
@@ -90,6 +98,7 @@ function EducationCard({ educations, setEducations, isEditable }) {
                       onClick={() => {
                         toggleEditEducationForm(education.id);
                         EditHandle();
+                        setClickID(education.id);
                       }}
                     >
                       편집

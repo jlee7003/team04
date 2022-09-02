@@ -14,7 +14,6 @@ const Education = ({ isEditable, portfolioOwnerId }) => {
   const toggleAddEducationForm = () => {
     setIsAdding(!isAdding);
   };
-  console.log(__dirname);
   const [educations, setEducations] = useState([]);
   const userState = useContext(UserStateContext);
   let educationid = "";
@@ -24,7 +23,8 @@ const Education = ({ isEditable, portfolioOwnerId }) => {
   const confirmAddEducation = (targetEducation) => {
     const resultEducations = [...educations, targetEducation];
     setEducations([...resultEducations]);
-    // setIsAdding(false);
+    setIsAdding(false);
+    setIsAdding(true);
   };
 
   const cancelAddEducation = () => {
@@ -45,7 +45,6 @@ const Education = ({ isEditable, portfolioOwnerId }) => {
           setEducations={setEducations}
           isEditable={isEditable}
         />
-
         {isEditable
           ? educationid === portfolioOwnerId && (
               <div className="mt-3 text-center mb-4 row">
