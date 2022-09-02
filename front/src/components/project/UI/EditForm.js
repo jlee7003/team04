@@ -5,13 +5,11 @@ import AuthContext from '../stores/AuthContext';
 import ErrorModalContext from '../../stores/ErrorModalContext';
 import CheckButton from './CheckButton';
 import { Form, Col, FloatingLabel } from 'react-bootstrap';
-import styles from '../../../styles/anime.css';
 
 const EditForm = (props) => {
   const context = useContext(AuthContext);
   const errorModalContext = useContext(ErrorModalContext);
   const [dataValues, setDataValues] = useState({});
-  const [isEmpty, setIsEmpty] = useState(false);
   const DATA_ENDPOINT = 'project';
 
   const setProjectValues = (e) => {
@@ -82,11 +80,6 @@ const EditForm = (props) => {
   return (
     <Form className="toggleTarget">
       <Form.Group>
-        {isEmpty && (
-          <div className="text-danger text-center" style={{ styles }}>
-            <span id="anime">빈 값이 있습니다.</span>
-          </div>
-        )}
         <FloatingLabel
           label="프로젝트 이름"
           className="mt-3 mb-3"

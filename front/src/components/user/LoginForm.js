@@ -4,7 +4,7 @@ import { Container, Col, Row, Form, Button } from 'react-bootstrap';
 
 import * as Api from '../../api';
 import { DispatchContext } from '../../App';
-import { useTheme } from '../darkmode/themeProvider';
+import { useTheme } from '../stores/themeProvider';
 import '../../../src/styles/index.css';
 
 import styles from '../../styles/login-animation.css';
@@ -70,7 +70,7 @@ function LoginForm({ isEditable }) {
           <Form
             onSubmit={handleSubmit}
             style={{ border: '0px' }}
-            id={theme == 'light' ? 'blight' : 'bdark'}
+            id={theme === 'light' ? 'blight' : 'bdark'}
           >
             <Form.Group controlId="loginEmail">
               <Form.Label>이메일 주소</Form.Label>

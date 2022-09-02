@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Col, Row, Form, Button } from 'react-bootstrap';
 import * as Api from '../../api';
-import { useTheme } from '../darkmode/themeProvider';
+import { useTheme } from '../stores/themeProvider';
 import '../../../src/styles/index.css';
 function RegisterForm() {
   const navigate = useNavigate();
@@ -53,7 +53,7 @@ function RegisterForm() {
           <Form
             onSubmit={handleSubmit}
             style={{ border: '0px' }}
-            id={theme == 'light' ? 'blight' : 'bdark'}
+            id={theme === 'light' ? 'blight' : 'bdark'}
           >
             <Form.Group controlId="registerEmail">
               <Form.Label>이메일 주소</Form.Label>

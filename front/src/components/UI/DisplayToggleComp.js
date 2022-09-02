@@ -1,17 +1,14 @@
 import React from 'react';
-import { useTheme } from './darkmode/themeProvider';
-import '../../src/styles/index.css';
+import { useTheme } from '../stores/themeProvider';
+import '../../../src/styles/index.css';
 import { useContext } from 'react';
-import { UserStateContext } from '../App';
+import { UserStateContext } from '../../App';
 import { Button } from 'react-bootstrap';
 
 const DisplayToggleComp = (props) => {
   const userState = useContext(UserStateContext);
   const 기존ID = userState?.user?.id;
   const 접속ID = props.portfolioOwnerId;
-  const ThemeMode = useTheme();
-  const theme = ThemeMode[0];
-
   const displayToggler = (e) => {
     e.preventDefault();
     const targetElement = document.querySelectorAll('.toggleTarget');
