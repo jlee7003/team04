@@ -26,6 +26,7 @@ const EducationForm = ({ onConfirm, onCancel, education, byEditbtn }) => {
   const editedValues = {
     ...targetEducation,
   };
+  console.log(editedValues);
   const handleConfirm = async (e) => {
     e.preventDefault();
     if (targetEducation.school === '' || targetEducation.major === '') {
@@ -47,7 +48,6 @@ const EducationForm = ({ onConfirm, onCancel, education, byEditbtn }) => {
         );
       }
     } catch (err) {
-      console.log('학력 등록에 실패하셨습니다.', err);
       errorModalContext.setModalText(
         `${err.message} // 학력 데이터를 등록하는 과정에서 문제가 발생했습니다.`
       );
