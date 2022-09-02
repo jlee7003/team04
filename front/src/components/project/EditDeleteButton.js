@@ -1,13 +1,11 @@
 import React, { useContext, useState, useRef, useEffect } from 'react';
-import * as Api from '../../../api';
+import * as Api from '../../api';
 
-import AuthContext from '../stores/AuthContext';
-import ErrorModalContext from '../../stores/ErrorModalContext';
+import ErrorModalContext from '../stores/ErrorModalContext';
 import { Col, Button, Overlay, Tooltip } from 'react-bootstrap';
-import '../../../styles/tooltip.css';
+import '../../styles/tooltip.css';
 
 const EditDeleteButton = (props) => {
-  const context = useContext(AuthContext);
   const errorModalContext = useContext(ErrorModalContext);
   const [isConfirm, setConfirm] = useState(false);
   const target = useRef(null);
@@ -41,8 +39,8 @@ const EditDeleteButton = (props) => {
   };
 
   const getEditIdList = (id) => {
-    context.setEditIdList((prevState) =>
-      context.editIdList.includes(id) ? prevState : [...prevState, id]
+    props.setEditIdList((prevState) =>
+      props.editIdList.includes(id) ? prevState : [...prevState, id]
     );
   };
 

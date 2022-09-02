@@ -58,7 +58,6 @@ function LoginForm({ isEditable }) {
 
       navigate('/', { state: { email } });
     } catch (err) {
-      console.log('로그인에 실패하였습니다.\n', err);
       setIsEmpty(true);
     }
   };

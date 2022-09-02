@@ -1,7 +1,7 @@
 import { Col } from 'react-bootstrap';
 import EditDeleteButton from './EditDeleteButton';
-import '../../../styles/index.css';
-const ListForm = (props) => {
+
+const ProjectCard = (props) => {
   return (
     <div className="mb-4">
       <div className="align-items-center row">
@@ -16,6 +16,8 @@ const ListForm = (props) => {
           <EditDeleteButton
             project={props.project}
             callFetch={props.callFetch}
+            editIdList={props.editIdList}
+            setEditIdList={props.setEditIdList}
           />
         )}
       </div>
@@ -23,4 +25,4 @@ const ListForm = (props) => {
   );
 };
 
-export default ListForm;
+export default ProjectCard;

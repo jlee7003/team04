@@ -1,15 +1,15 @@
 import React, { useState, useContext } from 'react';
-import * as Api from '../../../api';
+import * as Api from '../../api';
 
-import AuthContext from '../stores/AuthContext';
-import ErrorModalContext from '../../stores/ErrorModalContext';
+import ErrorModalContext from '../stores/ErrorModalContext';
 import CheckButton from './CheckButton';
 import { Form, Col, FloatingLabel } from 'react-bootstrap';
+import styles from '../../styles/anime.css';
 
-const EditForm = (props) => {
-  const context = useContext(AuthContext);
+const ProjectForm = (props) => {
   const errorModalContext = useContext(ErrorModalContext);
   const [dataValues, setDataValues] = useState({});
+  const [isEmpty, setIsEmpty] = useState(false);
   const DATA_ENDPOINT = 'project';
 
   const setProjectValues = (e) => {
@@ -18,24 +18,18 @@ const EditForm = (props) => {
   };
 
   const checkProjectValues = (projectValues) => {
-    const originalIsNotValid =
-      !projectValues.startDay &&
-      !projectValues.endDay &&
-      !projectValues.title &&
-      !projectValues.content;
+    const startDay = projectValues.startDay?.split('-').join('');
+    const endDay = projectValues.endDay?.split('-').join('');
 
-    if (originalIsNotValid) {
-      deleteIdFromIdList();
-      return false;
+    if (
+      !projectValues.startDay ||
+      !projectValues.endDay ||
+      !projectValues.title ||
+      !projectValues.content
+    ) {
+      setIsEmpty(true);
+      return;
     }
-
-    const startDay = projectValues.startDay
-      ? projectValues.startDay.split('-').join('')
-      : props.project.startDay.split('T')[0].split('-').join('');
-
-    const endDay = projectValues.endDay
-      ? projectValues.endDay.split('-').join('')
-      : props.project.endDay.split('T')[0].split('-').join('');
 
     if (startDay - endDay > 0) {
       alert('시작 날짜와 종료 날짜를 제대로 적어주세요.');
@@ -50,46 +44,51 @@ const EditForm = (props) => {
     return true;
   };
 
-  const confirmEdit = async (projectId) => {
-    const editedValues = {
-      ...dataValues,
-    };
-
-    if (!checkProjectValues(editedValues)) {
+  const callPost = async () => {
+    if (!checkProjectValues(dataValues)) {
       return;
     }
 
-    context.setEditIdList(context.editIdList.filter((id) => id !== projectId));
-
     try {
-      await Api.patch(DATA_ENDPOINT, projectId, editedValues);
+      await Api.post(DATA_ENDPOINT, dataValues);
       await props.callFetch();
     } catch (err) {
       errorModalContext.setModalText(
-        `${err.message} // 프로젝트 데이터를 수정하는 과정에서 문제가 발생했습니다.`
+        `${err.message} // 프로젝트 데이터를 전송하는 과정에 문제가 발생했습니다.`
       );
+    } finally {
+      setDataValues({
+        title: '',
+        content: '',
+        startDay: '',
+        endDay: '',
+      });
     }
   };
 
-  const deleteIdFromIdList = () => {
-    context.setEditIdList(
-      context.editIdList.filter((id) => id !== props.project.id)
-    );
+  const setIsAddingFalse = () => {
+    props.setIsAdding(false);
   };
 
   return (
     <Form className="toggleTarget">
       <Form.Group>
+        {isEmpty && (
+          <div className="text-danger text-center" style={{ styles }}>
+            <span id="anime">빈 값이 있습니다.</span>
+          </div>
+        )}
         <FloatingLabel
-          label="프로젝트 이름"
+          label="프로젝트 제목"
           className="mt-3 mb-3"
           style={{ color: 'black' }}
         >
           <Form.Control
             name="title"
             type="text"
+            placeholder="프로젝트 제목"
             onChange={setProjectValues}
-            defaultValue={props.project.title}
+            value={dataValues.title}
             maxLength="20"
           />
         </FloatingLabel>
@@ -97,14 +96,15 @@ const EditForm = (props) => {
       <Form.Group className="mt-3">
         <FloatingLabel
           label="상세 내역"
-          className="mb-3 "
+          className="mb-3"
           style={{ color: 'black' }}
         >
           <Form.Control
             name="content"
             type="text"
+            placeholder="상세 내역"
             onChange={setProjectValues}
-            defaultValue={props.project.content}
+            value={dataValues.content}
             maxLength="400"
           />
         </FloatingLabel>
@@ -112,29 +112,28 @@ const EditForm = (props) => {
       <Form.Group className="mt-3 row">
         <Col className="col-auto">
           <Form.Control
-            name="startDay"
             type="date"
+            name="startDay"
+            value={dataValues.startDay}
             onChange={setProjectValues}
-            defaultValue={props.project.startDay.split('T')[0]}
           />
         </Col>
         <Col className="col-auto">
           <Form.Control
-            name="endDay"
             type="date"
+            name="endDay"
             onChange={setProjectValues}
-            defaultValue={props.project.endDay.split('T')[0]}
+            value={dataValues.endDay}
           />
         </Col>
       </Form.Group>
       <CheckButton
         className={'mt-3 text-center'}
-        submitHandler={confirmEdit}
-        cancelHandler={deleteIdFromIdList}
-        project={props.project}
+        submitHandler={callPost}
+        cancelHandler={setIsAddingFalse}
       />
     </Form>
   );
 };
 
-export default EditForm;
+export default ProjectForm;
