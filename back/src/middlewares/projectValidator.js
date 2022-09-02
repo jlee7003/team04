@@ -24,7 +24,7 @@ exports.projectPostValidator = () => {
       .notEmpty()
       .withMessage(ERRORS.BODY_DATA_ERROR.errorCode)
       .bail()
-      .isLength({ min: 1, max: 200 })
+      .isLength({ min: 1, max: 400 })
       .withMessage(ERRORS.CONTENT_LENGTH_ERROR.errorCode),
     body("startDay")
       .notEmpty()
@@ -63,7 +63,7 @@ exports.projectPatchValidator = () => {
         update.title = toUpdate.title;
       }
       if (toUpdate.content) {
-        if (toUpdate.content.length > 200) {
+        if (toUpdate.content.length > 400) {
           throw new Error(ERRORS.CONTENT_LENGTH_ERROR.errorCode);
         }
         update.content = toUpdate.content;
