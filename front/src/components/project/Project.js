@@ -20,7 +20,7 @@ const Project = ({ portfolioOwnerId, isEditable }) => {
   const ThemeMode = useTheme();
   const theme = ThemeMode[0];
 
-  const [data, setData] = useState([]);
+  const [projectData, setProjectData] = useState([]);
   const [editIdList, setEditIdList] = useState([]);
   const [isAdding, setIsAdding] = useState(false);
 
@@ -67,7 +67,7 @@ const Project = ({ portfolioOwnerId, isEditable }) => {
     const userInfo = await getUserInfo(USER_ENDPOINT, portfolioOwnerId);
     const fetchedData = await getFetchedData(DATA_ENDPOINT, userInfo.id);
 
-    setData(fetchedData);
+    setProjectData(fetchedData);
   };
 
   useEffect(() => {
@@ -82,7 +82,7 @@ const Project = ({ portfolioOwnerId, isEditable }) => {
       >
         <Card.Body>
           <Card.Title>프로젝트</Card.Title>
-          {data.map((project) =>
+          {projectData.map((project) =>
             editIdList.includes(project.id) ? (
               <ProjectEditForm
                 key={project.id}
