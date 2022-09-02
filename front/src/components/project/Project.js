@@ -11,7 +11,7 @@ import { Card, Button } from 'react-bootstrap';
 import { useTheme } from '../stores/themeProvider';
 import '../../../src/styles/index.css';
 
-const CardFrame = ({ portfolioOwnerId, isEditable }) => {
+const Project = ({ portfolioOwnerId, isEditable }) => {
   const errorModalContext = useContext(ErrorModalContext);
 
   const USER_ENDPOINT = 'users';
@@ -129,4 +129,4 @@ const CardFrame = ({ portfolioOwnerId, isEditable }) => {
   );
 };
 
-export default CardFrame;
+export default Project;
