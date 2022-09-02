@@ -30,7 +30,7 @@ exports.educationPostValidator = () => {
       .notEmpty()
       .withMessage(ERRORS.BODY_DATA_ERROR.errorCode)
       .bail()
-      .isLength({ min: 1, max: 200 })
+      .isLength({ min: 1, max: 20 })
       .withMessage(ERRORS.CONTENT_LENGTH_ERROR.errorCode)
       .custom((value) => {
         if (!["재학중", "학사졸업", "석사졸업", "박사졸업"].includes(value)) {
