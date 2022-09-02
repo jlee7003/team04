@@ -70,7 +70,7 @@ function LoginForm({ isEditable }) {
           <Form
             onSubmit={handleSubmit}
             style={{ border: '0px' }}
-            id={theme == 'light' ? 'light' : 'dark'}
+            id={theme == 'light' ? 'blight' : 'bdark'}
           >
             <Form.Group controlId="loginEmail">
               <Form.Label>이메일 주소</Form.Label>
@@ -79,7 +79,7 @@ function LoginForm({ isEditable }) {
                 autoComplete="on"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                maxlength="20"
+                maxLength="20"
               />
               {!isEmailValid && (
                 <Form.Text className="text-success">
@@ -95,7 +95,7 @@ function LoginForm({ isEditable }) {
                 autoComplete="on"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                maxlength="20"
+                maxLength="20"
               />
               {!isPasswordValid && (
                 <Form.Text className="text-success">
