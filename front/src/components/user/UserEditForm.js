@@ -51,7 +51,7 @@ function UserEditForm({ user, setIsEditing, setUser }) {
         },
       });
     } else {
-      console.log('사진을 첨부 안하셨습니다');
+      alert('사진을 첨부 안하셨습니다.');
     }
 
     setIsEditing(false);
@@ -103,7 +103,6 @@ function UserEditForm({ user, setIsEditing, setUser }) {
               type="file"
               placeholder="선택된 파일 없음"
               id="formFile"
-              // value={}
               maxLength="100"
               onChange={onImgChange}
             />

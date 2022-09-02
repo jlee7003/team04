@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTheme } from '../stores/themeProvider';
 import '../../../src/styles/index.css';
 import { useContext } from 'react';
 import { UserStateContext } from '../../App';
@@ -9,6 +8,7 @@ const DisplayToggleComp = (props) => {
   const userState = useContext(UserStateContext);
   const existingId = userState?.user?.id;
   const loggedInId = props.portfolioOwnerId;
+
   const displayToggler = (e) => {
     e.preventDefault();
     const targetElement = document.querySelectorAll('.toggleTarget');
