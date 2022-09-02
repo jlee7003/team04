@@ -2,8 +2,7 @@ import React, { useState, useContext } from 'react';
 import * as Api from '../../api';
 
 import ErrorModalContext from '../stores/ErrorModalContext';
-import CheckButton from './CheckButton';
-import { Form, Col, FloatingLabel } from 'react-bootstrap';
+import { Form, Col, Button, FloatingLabel } from 'react-bootstrap';
 import styles from '../../styles/anime.css';
 
 const ProjectForm = (props) => {
@@ -66,10 +65,6 @@ const ProjectForm = (props) => {
     }
   };
 
-  const setIsAddingFalse = () => {
-    props.setIsAdding(false);
-  };
-
   return (
     <Form className="toggleTarget">
       <Form.Group>
@@ -127,11 +122,16 @@ const ProjectForm = (props) => {
           />
         </Col>
       </Form.Group>
-      <CheckButton
-        className={'mt-3 text-center'}
-        submitHandler={callPost}
-        cancelHandler={setIsAddingFalse}
-      />
+      <Form.Group className={`mt-3 text-center mb-3`}>
+        <Col>
+          <Button variant="primary" className="me-3" onClick={callPost}>
+            확인
+          </Button>
+          <Button variant="secondary" onClick={() => props.setIsAdding(false)}>
+            취소
+          </Button>
+        </Col>
+      </Form.Group>
     </Form>
   );
 };

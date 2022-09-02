@@ -2,8 +2,7 @@ import React, { useState, useContext } from 'react';
 import * as Api from '../../api';
 
 import ErrorModalContext from '../stores/ErrorModalContext';
-import CheckButton from './CheckButton';
-import { Form, Col, FloatingLabel } from 'react-bootstrap';
+import { Form, Col, FloatingLabel, Button } from 'react-bootstrap';
 
 const ProjectEditForm = (props) => {
   const errorModalContext = useContext(ErrorModalContext);
@@ -125,12 +124,20 @@ const ProjectEditForm = (props) => {
           />
         </Col>
       </Form.Group>
-      <CheckButton
-        className={'mt-3 text-center'}
-        submitHandler={confirmEdit}
-        cancelHandler={deleteIdFromIdList}
-        project={props.project}
-      />
+      <Form.Group className={`mt-3 text-center mb-3`}>
+        <Col>
+          <Button
+            variant="primary"
+            className="me-3"
+            onClick={() => confirmEdit(props.project.id)}
+          >
+            확인
+          </Button>
+          <Button variant="secondary" onClick={deleteIdFromIdList}>
+            취소
+          </Button>
+        </Col>
+      </Form.Group>
     </Form>
   );
 };
