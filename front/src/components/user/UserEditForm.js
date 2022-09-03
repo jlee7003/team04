@@ -50,8 +50,6 @@ function UserEditForm({ user, setIsEditing, setUser }) {
           Authorization: `Bearer ${sessionStorage.getItem('userToken')}`,
         },
       });
-    } else {
-      alert('사진을 첨부 안하셨습니다.');
     }
 
     setIsEditing(false);
