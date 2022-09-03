@@ -1,0 +1,19 @@
+#formInput {
+  /* position: absolute; */
+  /* min-width: 100px; */
+  /* height: 58px; */
+  width: 100%;
+  margin-top: 8px;
+  /* display: flex; */
+  margin-left: 15px;
+  justify-content: center;
+  z-index: 100;
+}
+#formwidth {
+  min-width: 100px;
+  height: 38px;
+  display: flex;
+}
+#formsearch {
+  min-width: 200px;
+}
