@@ -1,21 +1,48 @@
-import React, { useState, useEffect } from "react";
-import UserEditForm from "./UserEditForm";
-import UserCard from "./UserCard";
-import * as Api from "../../api";
+import React, { useState, useEffect, useContext } from 'react';
+import UserEditForm from './UserEditForm';
+import UserCard from './UserCard';
+import { UserStateContext } from '../../App';
+import * as Api from '../../api';
 
-function User({ portfolioOwnerId, isEditable }) {
-  // useState 훅을 통해 isEditing 상태를 생성함.
+function User({ portfolioOwnerId, isEditable, setIsEditable }) {
   const [isEditing, setIsEditing] = useState(false);
-  // useState 훅을 통해 user 상태를 생성함.
   const [user, setUser] = useState(null);
+  const me = useContext(UserStateContext);
 
   useEffect(() => {
-    // "users/유저id" 엔드포인트로 GET 요청을 하고, user를 response의 data로 세팅함.
-    Api.get("users", portfolioOwnerId).then((res) => setUser(res.data));
+    Api.get('users', portfolioOwnerId).then((res) => setUser(res.data));
   }, [portfolioOwnerId]);
 
+  useEffect(() => {
+    if (user !== null && me !== null) {
+      if (user.id !== me.user.id) {
+        const recentlyViewUserPortfolioObj = { name: user.name, id: user.id };
+        let recentlyViewUserPortfolio = JSON.parse(
+          localStorage.getItem(me.user.id) ?? '[]'
+        );
+
+        recentlyViewUserPortfolio = recentlyViewUserPortfolio.filter(
+          (targetObj) =>
+            targetObj.name !== recentlyViewUserPortfolioObj.name &&
+            targetObj.id !== recentlyViewUserPortfolioObj.id
+        );
+
+        recentlyViewUserPortfolio.unshift(recentlyViewUserPortfolioObj);
+
+        if (recentlyViewUserPortfolio.length > 5) {
+          recentlyViewUserPortfolio.pop();
+        }
+
+        localStorage.setItem(
+          me.user.id,
+          JSON.stringify(recentlyViewUserPortfolio)
+        );
+      }
+    }
+  }, [user]);
+
   return (
-    <>
+    <React.Fragment>
       {isEditing ? (
         <UserEditForm
           user={user}
@@ -26,10 +53,12 @@ function User({ portfolioOwnerId, isEditable }) {
         <UserCard
           user={user}
           setIsEditing={setIsEditing}
+          setIsEditable={setIsEditable}
           isEditable={isEditable}
+          portfolioOwnerId={portfolioOwnerId}
         />
       )}
-    </>
+    </React.Fragment>
   );
 }
 
