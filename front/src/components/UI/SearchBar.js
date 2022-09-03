@@ -1,11 +1,10 @@
-import * as Api from '../../api';
-import { useState, useEffect } from 'react';
-import searchBar from '../../styles/searchBar.css';
-import { Form } from 'react-bootstrap';
+import * as Api from "../../api";
+import { useState, useEffect } from "react";
+import searchBar from "../../styles/searchBar.css";
+import { Form } from "react-bootstrap";
 const Search = ({ setSearchData, setIsEmpty }) => {
-  const [Selected, setSelected] = useState('all');
-  const [inputValue, setInputValue] = useState('');
-  var getSearch = '';
+  const [Selected, setSelected] = useState("all");
+  const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -16,17 +15,9 @@ const Search = ({ setSearchData, setIsEmpty }) => {
   }, [inputValue]);
 
   const test = () => {
-    if (getSearch) {
-      clearTimeout(getSearch);
-    }
-
-    getSearch = setTimeout(() => {
-      Api.get2(`search?option=${Selected}&contents=${inputValue}`).then(
-        (res) => {
-          setSearchData(res.data);
-        }
-      );
-    }, 1000);
+    Api.get2(`search?option=${Selected}&contents=${inputValue}`).then((res) => {
+      setSearchData(res.data);
+    });
   };
   const handleChangeInput = (e) => {
     e.preventDefault();
@@ -50,7 +41,7 @@ const Search = ({ setSearchData, setIsEmpty }) => {
         <Form.Select
           aria-label="Default select example"
           onChange={handleChangeSelect}
-          style={{ height: '100%', width: '150px' }}
+          style={{ height: "100%", width: "150px" }}
         >
           <option value="all">통합 검색</option>
           <option value="name">이름</option>
@@ -64,9 +55,9 @@ const Search = ({ setSearchData, setIsEmpty }) => {
             className="form-control rounded formsearch"
             aria-label="Search"
             aria-describedby="search-addon"
-            style={{ Width: '100%', minWidth: '150px' }}
+            style={{ Width: "100%", minWidth: "150px" }}
           />
-          <input style={{ display: 'none ' }} />
+          <input style={{ display: "none " }} />
           <Form.Text className="text-muted"></Form.Text>
         </Form.Group>
       </form>
